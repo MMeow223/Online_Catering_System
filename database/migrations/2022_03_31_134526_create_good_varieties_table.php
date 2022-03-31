@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('good_varieties', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
             $table->timestamps();
-            $table->boolean('is_admin')->default(false);
+            // good_id, variety_name, is_available
+            $table->unsignedBigInteger('good_id');
+            $table->string('variety_name');
+            $table->boolean('is_available')->default(true);
+
+//            $table->foreign('good_id')->references('id')->on('goods');
         });
     }
 
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('good_varieties');
     }
 };
