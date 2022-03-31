@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('checkout_goods', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unique();
             $table->timestamps();
             // order_id, good_id, quantity,variety
             $table->unsignedBigInteger('order_id');
@@ -22,9 +22,9 @@ return new class extends Migration
             $table->unsignedBigInteger('variety_id');
             $table->unsignedInteger('quantity');
 
-//            $table->foreign('order_id')->references('id')->on('orders');
-//            $table->foreign('good_id')->references('id')->on('goods');
-//            $table->foreign('variety_id')->references('id')->on('varieties');
+            $table->foreign('order_id')->references('id')->on('orders');
+            $table->foreign('good_id')->references('id')->on('goods');
+            $table->foreign('variety_id')->references('id')->on('good_varieties');
         });
     }
 

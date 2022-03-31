@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('payments', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unique();
             $table->timestamps();
             $table->string('payment_method');
             $table->string('account_number')->nullable();

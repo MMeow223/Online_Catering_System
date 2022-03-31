@@ -14,17 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('goods', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unique();
             $table->timestamps();
             $table->string('good_name');
             $table->string('good_description');
             $table->string('good_image');
             $table->string('good_price');
-            $table->string('good_category_id');
+            $table->unsignedBigInteger('good_category_id');
             $table->string('is_warm');
             $table->string('is_available');
 
-//            $table->foreign('good_category_id')->references('id')->on('good_categories');
+            $table->foreign('good_category_id')->references('id')->on('good_categories');
         });
     }
 
