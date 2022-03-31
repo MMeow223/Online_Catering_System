@@ -17,9 +17,10 @@ class AccountSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => '123',
-            'email' => '1@icloud.com',
-            'password' => bcrypt('123'),
+            'username' => 'admin',
+            'email' => 'admin',
+            'password' => bcrypt('admin'),
+            'owner_id' => 1,
             'is_admin' => true,
             'created_at' => now(),
             'updated_at' => now(),
