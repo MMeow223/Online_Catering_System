@@ -13,12 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/testing', function () {
-    return view('testing');
-});
+Route::get('/', [\App\Http\Controllers\Controller::class,'index']);
+// route resource for goods
+Route::resource('goods', \App\Http\Controllers\GoodsController::class);
+
 
 Auth::routes();
 

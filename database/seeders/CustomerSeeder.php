@@ -2,12 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Pharmacies;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class AccountSeeder extends Seeder
+class CustomerSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,12 +15,12 @@ class AccountSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'username' => 'admin',
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('admin'),
-            'owner_id' => 1,
-            'is_admin' => true,
+        DB::table('customers')->insert([
+            'institution_name' => 'Swinburne University of Technology Sarawak Campus',
+            'institution_address' => 'Q5B, 93350 Kuching, Sarawak',
+            'email' => 'swinburne@swinburne.edu.my',
+            'phone' => '+60 82 415 353',
+            'is_member' => true,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

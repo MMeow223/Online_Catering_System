@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('good_varieties', function (Blueprint $table) {
             $table->id()->unique();
             $table->timestamps();
-            // good_id, variety_name, is_available
             $table->unsignedBigInteger('good_id');
             $table->string('variety_name');
             $table->boolean('is_available')->default(true);
