@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GoodCategory;
+use App\Models\GoodVariety;
 use Illuminate\Http\Request;
+use App\Models\Good;
+use Illuminate\Support\Facades\DB;
 
 class GoodsController extends Controller
 {
@@ -19,7 +23,8 @@ class GoodsController extends Controller
     public function index()
     {
         //link to index page
-        return view('goods.index');
+        return view('goods.index')
+            ->with('goods', Good::all());
     }
 
     /**
@@ -29,7 +34,8 @@ class GoodsController extends Controller
      */
     public function create()
     {
-        //
+        //link to create page
+        return view('goods.create');
     }
 
     /**
@@ -51,7 +57,10 @@ class GoodsController extends Controller
      */
     public function show($id)
     {
-        //
+        $good = Good::find($id);
+        return view('goods.show')
+            ->with('good',$good)
+            ->with('category', GoodCategory::find($good->good_category_id));
     }
 
     /**
@@ -62,19 +71,44 @@ class GoodsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $good = Good::find($id);
+        return view('goods.edit')
+            ->with('good',$good)
+            ->with('category', GoodCategory::find($good->good_category_id));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,int $id)
     {
-        //
+//         validate
+        $this->validate($request, [
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'category_id' => 'required'
+            ]);
+//        dd($request->input('name'));
+
+        DB::table('goods')
+            ->where('id',$id)
+            ->update([
+                'good_name' => $request->input('name'),
+                'good_price' => $request->input('price'),
+                'good_description' => $request->input('description'),
+                'good_category_id' => $request->input('category_id')
+            ]);
+
+
+        // redirect
+        return redirect()->route('goods.show', $id)->with('success', 'Good updated!');
+
     }
 
     /**
@@ -85,6 +119,11 @@ class GoodsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // remove item from database
+        GoodVariety::where('good_id',$id)->delete();
+        Good::destroy($id);
+
+        return redirect()->route('goods.index')
+            ->with('success','Good deleted');
     }
 }
