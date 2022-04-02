@@ -25,5 +25,15 @@ class AccountSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table('users')->insert([
+            'username' => 'user',
+            'email' => 'user@gmail.com',
+            'password' => bcrypt('user'),
+            'owner_id' => 2,
+            'is_admin' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }
