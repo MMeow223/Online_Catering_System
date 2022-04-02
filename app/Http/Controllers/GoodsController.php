@@ -24,7 +24,7 @@ class GoodsController extends Controller
     {
         //link to index page
         return view('goods.index')
-            ->with('goods', Good::all());
+            ->with('goods', Good::paginate(10));
     }
 
     /**
@@ -35,7 +35,8 @@ class GoodsController extends Controller
     public function create()
     {
         //link to create page
-        return view('goods.create');
+        return view('goods.create')
+            ->with('categories', GoodCategory::all());;
     }
 
     /**
@@ -46,7 +47,29 @@ class GoodsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        dd($request);
+        //         validate
+        $this->validate($request, [
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'category_id' => 'required',
+            'food_type_option' => 'required',
+        ]);
+
+        DB::table('goods')->insert([
+            'good_name' => $request->input('name'),
+            'good_description' => $request->input('description'),
+            'good_image' => ($request->input('image') != "")?$request->input('image'):"default.jpg",
+            'good_price' => $request->input('price'),
+            'good_category_id' => $request->input('category_id'),
+            'is_warm' => $request->input('food_type_option'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return redirect()->route('goods.index');
+
     }
 
     /**
@@ -74,7 +97,8 @@ class GoodsController extends Controller
         $good = Good::find($id);
         return view('goods.edit')
             ->with('good',$good)
-            ->with('category', GoodCategory::find($good->good_category_id));
+            ->with('categories', GoodCategory::all())
+            ->with('default_category', GoodCategory::find($good->good_category_id));
     }
 
     /**
