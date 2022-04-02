@@ -47,7 +47,9 @@
 
                             <div class="col-md-6">
                                 <select id="category_id" class="form-control" name="category_id" required >
-                                    <option value="{{ $category->id }}" @if($category->id == $good->good_category_id) selected @endif>{{ $category->category_title }}</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}" @if($category->id == $good->good_category_id) selected @endif>{{ $category->category_title }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
