@@ -55,11 +55,54 @@
                         </div>
 
                         <div class="form-group row my-2">
+                            <label for="option_group" class="col-md-4 col-form-label text-md-right">{{ __('Food Type') }}</label>
+
+                            <div class="col-md-6">
+
+                                <div class="btn-group col-md-6" role="group" aria-label="Basic radio toggle button group">
+                                    <input type="radio" class="btn-check" name="food_type_option" value=1 id="warm_outlined" autocomplete="off" @if($good->is_warm) checked @endif>
+                                    <label class="btn btn-outline-warm" for="warm_outlined">{{__('Warm')}}</label>
+
+                                    <input type="radio" class="btn-check" name="food_type_option" value=0 id="cold_outlined" autocomplete="off" @if($good->is_warm == false) checked @endif>
+                                    <label class="btn btn-outline-cold" for="cold_outlined">{{__('Cold')}}</label>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row my-2">
+                            <label for="option_group" class="col-md-4 col-form-label text-md-right">{{ __('Availability') }}</label>
+
+                            <div class="col-md-6">
+
+                                <div class="btn-group col-md-6" role="group" aria-label="Basic radio toggle button group">
+                                    <input type="radio" class="btn-check" name="availability_option" value=1 id="available_outlined" autocomplete="off" @if($good->is_available) checked @endif>
+                                    <label class="btn btn-outline-success" for="available_outlined">{{__('Available')}}</label>
+
+                                    <input type="radio" class="btn-check" name="availability_option" value=0 id="not_available_outlined" autocomplete="off" @if($good->is_available == false) checked @endif>
+                                    <label class="btn btn-outline-danger" for="not_available_outlined">{{__('Unavailable')}}</label>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row my-2">
                             <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
 
                             <div class="col-md-6">
-                                <img id="image" class="rounded shadow" height="200" width="200" src="https://i0.wp.com/post.healthline.com/wp-content/uploads/2020/09/french-fries-1296x728-header.jpg?w=1155&h=1528">
+                                <div class="mb-3">
+{{--                                    <input id="names" type="text" class="form-control" name="names">--}}
+
+                                        {{ Form::file('image', ['class' => 'form-control']) }}
+{{--                                    <input class="form-control" type="text" id="image" name="image">--}}
+{{--                                    <input id="image" type="text" class="form-control" name="image" autofocus >--}}
+
+                                </div>
                             </div>
+{{--                            <div class="d-flex justify-content-center">--}}
+{{--                                <img id="image_show" class="rounded shadow" height="200" width="200" src="https://i0.wp.com/post.healthline.com/wp-content/uploads/2020/09/french-fries-1296x728-header.jpg?w=1155&h=1528">--}}
+
+{{--                            </div>--}}
                         </div>
                     </div>
                 </div>

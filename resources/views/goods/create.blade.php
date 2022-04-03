@@ -49,12 +49,10 @@
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->category_title }}</option>
                                     @endforeach
-{{--                                    <option value="{{ $category->id }}" @if($category->id == $good->good_category_id) selected @endif>{{ $category->category_title }}</option>--}}
                                 </select>
                             </div>
                         </div>
 
-{{--                        create group of warm or cold food--}}
                         <div class="form-group row my-2">
                             <label for="option_group" class="col-md-4 col-form-label text-md-right">{{ __('Food Type') }}</label>
 
