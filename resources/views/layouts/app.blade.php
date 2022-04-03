@@ -25,10 +25,10 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-dark bg-gradient shadow-sm">
-            <div class="container">
-                <a class="navbar-brand text-white" href="{{ url('/') }}">
-                    {{ config('app.name') }}
+        <nav class="navbar navbar-expand-md navbar-light bg-dark shadow-sm sticky-top">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white fw-bold text-uppercase" href="{{ url('/') }}">
+                    Online Catering Service
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -37,15 +37,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        @guest
 
-                        @else
-                            @if(auth()->user()->is_admin)
-                                <li><a class="text-decoration-none text-white" href="{{route('goods.index')}}">Goods Manage</a></li>
-                            @else
-
-                            @endif
-                        @endguest
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -90,6 +82,45 @@
         <main class="py-4">
             @include('inc.message')
             @yield('content')
+            <!--Admin Dashboard-->
+                <div
+                    class="offcanvas offcanvas-start sidebar-nav bg-dark"
+                    tabindex="-1"
+                    id="sidebar"
+                >
+                    <div class="offcanvas-body p-0">
+                        <nav class="navbar-dark">
+                            <ul class="navbar-nav">
+                                <li>
+                                    <div class="text-muted small fw-bold text-uppercase px-3">
+                                        CORE
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="{{route('home')}}" class="nav-link px-3 active">
+                                        <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                                        <span>Dashboard</span>
+                                    </a>
+                                </li>
+                                <li>
+                                @guest
+
+                                @else
+                                    @if(auth()->user()->is_admin)
+                                        <a href="{{route('goods.index')}}" class="nav-link px-3 active">
+                                            <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                                            <span>Goods Manage</span>
+                                        </a>
+                                    @else
+
+                                    @endif
+                                @endguest
+
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
         </main>
     </div>
 </body>

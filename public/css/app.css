@@ -7805,6 +7805,9 @@ textarea.form-control-lg {
   --bs-text-opacity: 1;
 }
 
+.bg-blue{
+    background-color: #52accc;
+}
 .bg-primary {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
@@ -11345,3 +11348,20 @@ textarea.form-control-lg {
   color: #48baff;
   background-color: transparent;
 }
+
+:root {
+    --offcanvas-width: 276px;
+    --topNavbarHeight: 55px;
+}
+.menu-hover {
+    color: #000000;
+}
+
+.sidebar-nav{
+    width: var(--offcanvas-width);
+    transform:none;
+    visibility: visible !important;
+    top:var(--topNavbarHeight);
+    height: calc(100% - var(--topNavbarHeight));
+}
+
