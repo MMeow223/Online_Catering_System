@@ -24,5 +24,14 @@ class CustomerSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        DB::table('customers')->insert([
+            'institution_name' => 'University of Malaya',
+            'institution_address' => 'Kuala Lumpur, Malaysia',
+            'email' => 'universitymalaysa@um.edu.my',
+            'phone' => '+60 29 932 2002',
+            'is_member' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

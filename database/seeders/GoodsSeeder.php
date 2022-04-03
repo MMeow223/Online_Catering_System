@@ -16,7 +16,7 @@ class GoodsSeeder extends Seeder
     public function run()
     {
 
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 50; $i++) {
             $good_category_id = DB::table('good_categories')->get()->random()->id;
 
             DB::table('goods')->insert([
