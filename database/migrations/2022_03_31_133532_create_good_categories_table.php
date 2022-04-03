@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('good_categories', function (Blueprint $table) {
             $table->id()->unique();
             $table->timestamps();
-            $table->string('categoru_title');
+            $table->string('category_title');
             $table->string('category_description');
         });
     }

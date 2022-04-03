@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('good_image');
             $table->string('good_price');
             $table->unsignedBigInteger('good_category_id');
-            $table->string('is_warm');
-            $table->string('is_available');
+            $table->boolean('is_warm');
+            $table->boolean('is_available')->default(true);
 
             $table->foreign('good_category_id')->references('id')->on('good_categories');
         });

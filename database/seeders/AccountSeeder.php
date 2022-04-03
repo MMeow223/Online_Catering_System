@@ -18,10 +18,20 @@ class AccountSeeder extends Seeder
     {
         DB::table('users')->insert([
             'username' => 'admin',
-            'email' => 'admin',
+            'email' => 'admin@gmail.com',
             'password' => bcrypt('admin'),
             'owner_id' => 1,
             'is_admin' => true,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('users')->insert([
+            'username' => 'user',
+            'email' => 'user@gmail.com',
+            'password' => bcrypt('user'),
+            'owner_id' => 2,
+            'is_admin' => false,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
