@@ -111,27 +111,41 @@ class GoodsController extends Controller
      */
     public function update(Request $request,int $id)
     {
-//         validate
         $this->validate($request, [
             'name' => 'required',
             'price' => 'required',
             'description' => 'required',
-            'category_id' => 'required'
+            'category_id' => 'required',
+            'food_type_option' => 'required',
+            'availability_option' => 'required',
             ]);
-//        dd($request->input('name'));
 
-        DB::table('goods')
+        if($request->hasFile('image')){
+            $image_file_path = 'image_'.time().'_'.rand(0,9).'.jpg';
+            dd($request);
+            $request->file('image')->move(public_path('images'), $image_file_path);
+        }
+        else{
+            $image_file_path = 'default.jpg';
+        }
+
+        $query = DB::table('goods')
             ->where('id',$id)
             ->update([
                 'good_name' => $request->input('name'),
                 'good_price' => $request->input('price'),
                 'good_description' => $request->input('description'),
-                'good_category_id' => $request->input('category_id')
+                'good_category_id' => $request->input('category_id'),
+                'is_warm' => $request->input('food_type_option'),
+                'is_available' => $request->input('availability_option'),
+                'good_image' => $image_file_path,
             ]);
-
+        if(!$query){
+            return redirect()->route('goods.index')->with('error','Record Added Failed. Please Try Again');
+        }
 
         // redirect
-        return redirect()->route('goods.show', $id)->with('success', 'Good updated!');
+        return redirect()->route('goods.show', $id)->with('success', $request->good_name .'have been updated!');
 
     }
 
