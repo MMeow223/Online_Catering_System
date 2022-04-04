@@ -5,88 +5,99 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card shadow">
-                    <div class="card-header d-flex justify-content-between">
-                        <h5 class="my-auto">{{ __('Good') }}</h5>
-                        <div>
-                            <a href="{{route('goods.edit',$good->id)}}" class="btn btn-primary float-right">{{ __('Edit') }}</a>
-                            <a href="{{ url()->previous() }}" class="btn btn-secondary float-right">{{ __('Back') }}</a>
-                        </div>
-                    </div>
+                    <script>
+                        window.onload = function() {
+
+                            let type = "none";
+                            if ({{ __($good->is_warm) }} === 1) {
+                                type = "Warm";
+                            } else if ({{ __($good->is_warm) }} === 0) {
+                                type = "Cold";
+                            }
+
+                            let myOptions = ['Original'];
+
+                            @foreach($variety as $j)
+                                myOptions.push('{{ __($j->variety_name) }}');
+                            @endforeach
+
+                            let select = document.getElementById("variety_select");
+                            for (let i = 1; i <= myOptions.length; i++) {
+                                let option = '<option value="' + i + '" >' + myOptions[i - 1] + '</option>';
+                                select.insertAdjacentHTML('beforeend', option);
+                            }
+
+                            document.getElementById("type").innerHTML = type;
+                        };
+                    </script>
 
                     <div class="card-body">
-                        <div class="form-group row my-2">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
-                            <div class="col-md-6">
-
-                                <input id="name" type="text" class="form-control" name="name" value="{{$good->good_name}}" required autofocus disabled>
-                            </div>
-                        </div>
-
-                        <div class="form-group row my-2">
-                            <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="description" type="text" class="form-control" name="description" value="{{$good->good_description}}" required autofocus disabled>
-                            </div>
-                        </div>
-
-                        <div class="form-group row my-2">
-                            <label for="price" class="col-md-4 col-form-label text-md-right">{{ __('Price') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="price" type="text" class="form-control" name="price" value="{{$good->good_price}}" required autofocus disabled>
-                            </div>
-                        </div>
-
-                        <div class="form-group row my-2">
-                            <label for="category_id" class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</label>
-
-                            <div class="col-md-6">
-                                <select id="category_id" class="form-control" name="category_id" required disabled>
-                                    <option value="{{ $category->id }}">{{ $category->category_title }}</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row my-2">
-                            <label for="option_group" class="col-md-4 col-form-label text-md-right">{{ __('Food Type') }}</label>
-
-                            <div class="col-md-6">
-
-                                <div class="btn-group col-md-6" role="group" aria-label="Basic radio toggle button group">
-                                    <input type="radio" class="btn-check" name="food_type_option" value=1 id="warm_outlined" autocomplete="off" @if($good->is_warm) checked @endif disabled>
-                                    <label class="btn btn-outline-warm" for="warm_outlined">{{__('Warm')}}</label>
-
-                                    <input type="radio" class="btn-check" name="food_type_option" value=0 id="cold_outlined" autocomplete="off" @if($good->is_warm == false) checked @endif disabled>
-                                    <label class="btn btn-outline-cold" for="cold_outlined">{{__('Cold')}}</label>
-
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="well"><img width="240" height="240" src="{{url("/images/$good->good_image")}}">
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="form-group row my-2">
-                            <label for="option_group" class="col-md-4 col-form-label text-md-right">{{ __('Food Type') }}</label>
-
-                            <div class="col-md-6">
-
-                                <div class="btn-group col-md-6" role="group" aria-label="Basic radio toggle button group">
-                                    <input type="radio" class="btn-check" name="availability_option" value=1 id="available_outlined" autocomplete="off" @if($good->is_available) checked @endif  disabled>
-                                    <label class="btn btn-outline-success" for="available_outlined">{{__('Available')}}</label>
-
-                                    <input type="radio" class="btn-check" name="availability_option" value=0 id="not_available_outlined" autocomplete="off" @if($good->is_available == false) checked @endif disabled>
-                                    <label class="btn btn-outline-danger" for="not_available_outlined">{{__('Unavailable')}}</label>
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h3 class="well">{{ __($good->good_name) }}</h3>
+                                    </div>
 
                                 </div>
-                            </div>
-                        </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="well">Category:</div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="well"><option value="{{ $category->id }}">{{ $category->category_title }}</option></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="well">Type:</div>
+                                    </div>
+                                    <div class="col-md-9">
 
-                        <div class="form-group row my-2">
-                            <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
+                                        <p id = "type"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="well" id="description">{{ __($good->good_description) }}</div>
+                                </div>
+                                <div class="row">
 
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <img width="200" height="200" src="{{url("/images/$good->good_image")}}">
+                                    <select name="variety_select" id="variety_select"></select>
+                                    <div class="well">RM{{ __($good->good_price) }}</div>
+                                </div>
+                                <div class="row">
+                                    <script>
+                                    function increaseValue() {
+                                        let value = parseInt(document.getElementById('number').value, 10);
+                                    value = isNaN(value) ? 0 : value;
+                                    value++;
+                                    document.getElementById('number').value = value;
+                                    }
+
+                                    function decreaseValue() {
+                                        let value = parseInt(document.getElementById('number').value, 10);
+                                    value = isNaN(value) ? 0 : value;
+                                    value < 1 ? value = 1 : '';
+                                    value--;
+                                    document.getElementById('number').value = value;
+                                    }
+                                    </script>
+                                    <form>
+                                        <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+                                        <input type="number" id="number" value="1" />
+                                        <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

@@ -15,16 +15,27 @@ class GoodsVarietySeeder extends Seeder
      */
     public function run()
     {
-
         for ($i = 1; $i <= 10; $i++) {
             $goods_id = DB::table('goods')->get()->random()->id;
 
             DB::table('good_varieties')->insert([
-                'good_id' => $goods_id,
-                'variety_name' => 'Variety ' . $i,
+                'good_id' => $i,
+                'variety_name' => 'Variety ' . $goods_id,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
         }
+
+        for ($i = 1; $i <= 50; $i++) {
+            $goods_id = DB::table('goods')->get()->random()->id;
+
+            DB::table('good_varieties')->insert([
+                'good_id' => $i,
+                'variety_name' => 'Variety ' . $goods_id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
     }
 }
