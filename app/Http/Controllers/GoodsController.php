@@ -24,7 +24,7 @@ class GoodsController extends Controller
     {
         //link to index page
         return view('goods.index')
-            ->with('goods', Good::paginate(10));
+            ->with('goods', Good::orderBy('updated_at','DESC')->paginate(10));
     }
 
     /**
@@ -36,7 +36,7 @@ class GoodsController extends Controller
     {
         //link to create page
         return view('goods.create')
-            ->with('categories', GoodCategory::all());;
+            ->with('categories', GoodCategory::all());
     }
 
     /**
@@ -47,8 +47,8 @@ class GoodsController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request);
-        //         validate
+//        dd($request->all());
+        // check if required fields are filled
         $this->validate($request, [
             'name' => 'required',
             'price' => 'required',
@@ -57,10 +57,19 @@ class GoodsController extends Controller
             'food_type_option' => 'required',
         ]);
 
+        if($request->hasFile('image')){
+            $image_file_path = 'image_'.time().'_'.rand(0,9).'.jpg';
+            $request->file('image')->move(public_path('images'), $image_file_path);
+        }
+        else{
+            $image_file_path = 'default.jpg';
+        }
+
+        // create new good
         DB::table('goods')->insert([
             'good_name' => $request->input('name'),
             'good_description' => $request->input('description'),
-            'good_image' => ($request->input('image') != "")?$request->input('image'):"default.jpg",
+            'good_image' => $image_file_path,
             'good_price' => $request->input('price'),
             'good_category_id' => $request->input('category_id'),
             'is_warm' => $request->input('food_type_option'),
@@ -68,6 +77,10 @@ class GoodsController extends Controller
             'updated_at' => now(),
         ]);
 
+
+        GoodVarietyController::staticStoreGoodVariety($request);
+
+        // redirect to index page
         return redirect()->route('goods.index');
 
     }
@@ -80,10 +93,12 @@ class GoodsController extends Controller
      */
     public function show($id)
     {
+        //link to show page with good data and category data
         $good = Good::find($id);
         return view('goods.show')
             ->with('good',$good)
-            ->with('category', GoodCategory::find($good->good_category_id));
+            ->with('category', GoodCategory::find($good->good_category_id))
+            ->with('varieties', GoodVariety::where('good_id', $id)->orderBy('is_available','DESC')->get());
     }
 
     /**
@@ -98,7 +113,8 @@ class GoodsController extends Controller
         return view('goods.edit')
             ->with('good',$good)
             ->with('categories', GoodCategory::all())
-            ->with('default_category', GoodCategory::find($good->good_category_id));
+            ->with('default_category', GoodCategory::find($good->good_category_id))
+            ->with('varieties', GoodVariety::where('good_id', $id)->orderBy('is_available','DESC')->get());;
     }
 
     /**
@@ -111,6 +127,7 @@ class GoodsController extends Controller
      */
     public function update(Request $request,int $id)
     {
+//        dd($request);
         $this->validate($request, [
             'name' => 'required',
             'price' => 'required',
@@ -122,11 +139,10 @@ class GoodsController extends Controller
 
         if($request->hasFile('image')){
             $image_file_path = 'image_'.time().'_'.rand(0,9).'.jpg';
-            dd($request);
             $request->file('image')->move(public_path('images'), $image_file_path);
         }
         else{
-            $image_file_path = 'default.jpg';
+            $image_file_path = Good::find($id)->good_image;
         }
 
         $query = DB::table('goods')
@@ -139,13 +155,18 @@ class GoodsController extends Controller
                 'is_warm' => $request->input('food_type_option'),
                 'is_available' => $request->input('availability_option'),
                 'good_image' => $image_file_path,
+                'updated_at' => now(),
+                // actually it will update this column automatically,
+                // but we want to make sure the query is executed,
+                // so add it wont give wrong error toast
             ]);
         if(!$query){
             return redirect()->route('goods.index')->with('error','Record Added Failed. Please Try Again');
         }
+        GoodVarietyController::staticEditGoodVariety($request);
+        GoodVarietyController::staticStoreGoodVariety($request);
 
-        // redirect
-        return redirect()->route('goods.show', $id)->with('success', $request->good_name .'have been updated!');
+        return redirect()->route('goods.show', $id)->with('success',$request->name . ' have been updated!');
 
     }
 
