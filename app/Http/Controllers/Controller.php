@@ -22,7 +22,8 @@ class Controller extends BaseController
 
     public function index() {
 
-        return view("home")
-            ;
+        if(Auth::user()->is_admin){
+            return view("home");
+        }
     }
 }

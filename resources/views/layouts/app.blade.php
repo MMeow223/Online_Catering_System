@@ -82,45 +82,6 @@
         <main class="py-4">
             @include('inc.message')
             @yield('content')
-            <!--Admin Dashboard-->
-                <div
-                    class="offcanvas offcanvas-start sidebar-nav bg-dark"
-                    tabindex="-1"
-                    id="sidebar"
-                >
-                    <div class="offcanvas-body p-0">
-                        <nav class="navbar-dark">
-                            <ul class="navbar-nav">
-                                <li>
-                                    <div class="text-muted small fw-bold text-uppercase px-3">
-                                        CORE
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="{{route('home')}}" class="nav-link px-3 active">
-                                        <span class="me-2"><i class="bi bi-speedometer2"></i></span>
-                                        <span>Dashboard</span>
-                                    </a>
-                                </li>
-                                <li>
-                                @guest
-
-                                @else
-                                    @if(auth()->user()->is_admin)
-                                        <a href="{{route('goods.index')}}" class="nav-link px-3 active">
-                                            <span class="me-2"><i class="bi bi-speedometer2"></i></span>
-                                            <span>Goods Manage</span>
-                                        </a>
-                                    @else
-
-                                    @endif
-                                @endguest
-
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
         </main>
     </div>
 </body>
