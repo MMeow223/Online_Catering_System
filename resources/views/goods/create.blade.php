@@ -70,6 +70,7 @@
 
                             <div class="col-md-6">
                                 <input id="price" type="number" class="form-control" name="price" required autofocus>
+
                                 <div class="collapse" id="collapse-price">
                                     <p class="text-muted"><small>This value entered in this field will be displayed as the goods price. A reasonable price will increase the willingness of customer to buy a goods.</small></p>
                                 </div>
