@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class GoodVariety extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'good_id',
+        'variety_name',
+        'is_available',
+    ];
+
 }

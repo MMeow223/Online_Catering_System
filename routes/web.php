@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\Controller::class,'index']);
 // route resource for goods
 Route::resource('goods', \App\Http\Controllers\GoodsController::class);
+Route::resource('variety', \App\Http\Controllers\GoodVarietyController::class);
 
 
 Auth::routes();
