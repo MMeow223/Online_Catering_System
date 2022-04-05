@@ -47,16 +47,16 @@ class GoodsController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->all());
-        // check if required fields are filled
+        // validate the data
         $this->validate($request, [
-            'name' => 'required',
-            'price' => 'required',
-            'description' => 'required',
-            'category_id' => 'required',
-            'food_type_option' => 'required',
+            'name' => 'required|max:255',
+            'description' => 'required|max:255',
+            'price' => 'required|numeric',
+            'category_id' => 'required|integer',
+            'food_type_option' => 'required|integer',
         ]);
 
+        // check if has image file, then generate unique name, and store to public/images, otherwise assign a default image to it
         if($request->hasFile('image')){
             $image_file_path = 'image_'.time().'_'.rand(0,9).'.jpg';
             $request->file('image')->move(public_path('images'), $image_file_path);
@@ -77,7 +77,7 @@ class GoodsController extends Controller
             'updated_at' => now(),
         ]);
 
-
+        // create the variety of the good
         GoodVarietyController::staticStoreGoodVariety($request);
 
         // redirect to index page
@@ -93,7 +93,7 @@ class GoodsController extends Controller
      */
     public function show($id)
     {
-        //link to show page with good data and category data
+        // link to show page with good data and category data
         $good = Good::find($id);
         return view('goods.show')
             ->with('good',$good)
@@ -109,12 +109,13 @@ class GoodsController extends Controller
      */
     public function edit($id)
     {
+        // link to edit page with good data and category data
         $good = Good::find($id);
         return view('goods.edit')
             ->with('good',$good)
             ->with('categories', GoodCategory::all())
             ->with('default_category', GoodCategory::find($good->good_category_id))
-            ->with('varieties', GoodVariety::where('good_id', $id)->orderBy('is_available','DESC')->get());;
+            ->with('varieties', GoodVariety::where('good_id', $id)->orderBy('is_available','DESC')->get());
     }
 
     /**
@@ -127,7 +128,7 @@ class GoodsController extends Controller
      */
     public function update(Request $request,int $id)
     {
-//        dd($request);
+        // validate the data
         $this->validate($request, [
             'name' => 'required',
             'price' => 'required',
@@ -137,6 +138,7 @@ class GoodsController extends Controller
             'availability_option' => 'required',
             ]);
 
+        // check if has image file, then generate unique name, and store to public/images, otherwise assign a default image to it
         if($request->hasFile('image')){
             $image_file_path = 'image_'.time().'_'.rand(0,9).'.jpg';
             $request->file('image')->move(public_path('images'), $image_file_path);
@@ -145,6 +147,7 @@ class GoodsController extends Controller
             $image_file_path = Good::find($id)->good_image;
         }
 
+        // update good
         $query = DB::table('goods')
             ->where('id',$id)
             ->update([
@@ -160,12 +163,17 @@ class GoodsController extends Controller
                 // but we want to make sure the query is executed,
                 // so add it wont give wrong error toast
             ]);
+
+        // if update fail, then redirect to good.index page with error toast
         if(!$query){
             return redirect()->route('goods.index')->with('error','Record Added Failed. Please Try Again');
         }
+
+        // update the variety of the good
         GoodVarietyController::staticEditGoodVariety($request);
         GoodVarietyController::staticStoreGoodVariety($request);
 
+        // redirect to good.show page with success toast
         return redirect()->route('goods.show', $id)->with('success',$request->name . ' have been updated!');
 
     }
@@ -178,10 +186,13 @@ class GoodsController extends Controller
      */
     public function destroy($id)
     {
-        // remove item from database
+        // remove the varieties that are belongs to the good first
         GoodVariety::where('good_id',$id)->delete();
+
+        // remove the good
         Good::destroy($id);
 
+        // redirect admin back to the good.index page and prompt a success message
         return redirect()->route('goods.index')
             ->with('success','Good deleted');
     }

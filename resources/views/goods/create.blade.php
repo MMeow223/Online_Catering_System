@@ -69,7 +69,8 @@
                             </div>
 
                             <div class="col-md-6">
-                                <input id="price" type="text" class="form-control" name="price" required autofocus>
+                                <input id="price" type="number" class="form-control" name="price" required autofocus>
+
                                 <div class="collapse" id="collapse-price">
                                     <p class="text-muted"><small>This value entered in this field will be displayed as the goods price. A reasonable price will increase the willingness of customer to buy a goods.</small></p>
                                 </div>
@@ -94,9 +95,6 @@
                                         <option value="{{ $category->id }}">{{ $category->category_title }}</option>
                                     @endforeach
                                 </select>
-                                {{--                                <select id="category_id" class="form-control" name="category_id" required disabled>--}}
-                                {{--                                    <option value="{{ $category->id }}">{{ $category->category_title }}</option>--}}
-                                {{--                                </select>--}}
                                 <div class="collapse" id="collapse-category">
                                     <p class="text-muted"><small>Select a category for the goods can help the customer to better navigate and find their desired item.</small></p>
                                 </div>
@@ -192,10 +190,8 @@
 
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    {{ Form::file('image', ['class' => 'form-control']) }}
-
+                                    <input type="file" name="image" class="form-control" />
                                     <div class="collapse" id="collapse-good-image">
-
                                         <p class="text-muted"><small>This is the image that will be displayed as thumbnail.</small></p>
                                     </div>
                                 </div>
