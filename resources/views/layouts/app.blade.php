@@ -107,12 +107,6 @@
                                             <span>Dashboard</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="{{route('goods.index')}}" class="nav-link px-3 active">
-                                            <span class="me-2"><i class="bi bi-speedometer2"></i></span>
-                                            <span>Goods Manage</span>
-                                        </a>
-                                    </li>
                                 </ul>
                             </nav>
                         </div>
