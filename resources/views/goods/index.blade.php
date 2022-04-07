@@ -7,9 +7,11 @@
                 <div class="card shadow">
                     <div class="card-header">
                         <div class=" d-flex justify-content-between">
-                            <h3>{{ __('Goods') }}</h3>
                             <div>
-
+                                <h3 class="d-inline">{{ __('Goods') }}</h3>
+                                <small class="text-muted d-inline"> (View all goods name, price, and description)</small>
+                            </div>
+                            <div>
                                 <a href="{{ route('goods.create') }}"
                                    class="btn btn-primary float-right">{{ __('Create') }}</a>
                                 <a href="{{ url()->previous() }}"
