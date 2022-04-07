@@ -11,7 +11,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 {{--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>--}}
 {{--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>--}}
 
@@ -31,15 +32,17 @@
             <a class="navbar-brand text-white fw-bold text-uppercase" href="{{ url('/') }}">
                 Online Catering Service
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav me-auto">
+{{--                <ul class="navbar-nav me-auto">--}}
 
-                </ul>
+{{--                </ul>--}}
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
@@ -58,7 +61,8 @@
                         @endif
                     @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button"
+                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->username }}
                             </a>
 
@@ -81,11 +85,12 @@
     </nav>
 
     <main class="py-4">
-    @include('inc.message')
-    @yield('content')
-        @guest
 
-        @else
+    @guest
+
+    @else
+        <div class="row m-auto p-auto">
+            <div class="col-3">
             @if(auth()->user()->is_admin)
                 <!--Admin Dashboard-->
                     <div
@@ -117,11 +122,18 @@
                             </nav>
                         </div>
                     </div>
-        @else
+                @endif
+            </div>
+            <div class="col-8">
 
-        @endif
+                @include('inc.message')
+                @yield('content')
+            </div>
+
+
+{{--                The content is here--}}
+        </div>
     @endguest
-    <!--Admin Dashboard-->
     </main>
 </div>
 </body>
