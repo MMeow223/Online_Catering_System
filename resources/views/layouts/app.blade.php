@@ -113,6 +113,18 @@
                                             <span>Goods Manage</span>
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="#" class="nav-link px-3 active">
+                                            <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                                            <span>Orders</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="nav-link px-3 active">
+                                            <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                                            <span>Payment</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
