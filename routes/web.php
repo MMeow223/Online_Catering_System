@@ -1,5 +1,5 @@
 <?php
-//foasnofno
+
 use Illuminate\Support\Facades\Route;
 
 /*
