@@ -17,6 +17,7 @@ Route::get('/', [\App\Http\Controllers\Controller::class,'index']);
 // route resource for goods
 Route::resource('goods', \App\Http\Controllers\GoodsController::class);
 Route::resource('variety', \App\Http\Controllers\GoodVarietyController::class);
+Route::resource('payment', \App\Http\Controllers\PaymentController::class);
 
 
 Auth::routes();

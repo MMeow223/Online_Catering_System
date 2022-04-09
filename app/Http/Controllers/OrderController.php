@@ -23,7 +23,7 @@ class OrderController extends Controller
     public function index()
     {
         //link to index page
-        return view('order.index')
+        return view('payment.index')
             ->with('order', Order::orderBy('updated_at','DESC')->paginate(10));
     }
 

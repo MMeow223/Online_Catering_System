@@ -24,7 +24,7 @@ class PaymentController extends Controller
     {
         //link to index page
         return view('payment.index')
-            ->with('payment', Payment::orderBy('id','DESC')->paginate(10));
+            ->with('payment', Payment::orderBy('created_at','DESC')->paginate(10));
     }
 
     /**
@@ -35,7 +35,6 @@ class PaymentController extends Controller
     public function create()
     {
         //link to create page
-        return view('payment.create');
     }
 
     /**
@@ -64,8 +63,8 @@ class PaymentController extends Controller
         DB::table('payment')->insert([
             'payment_method' => $request->input('payment_method'),
             'account_number' => $request->input('account_number'),
-            'transaction_id' => $image_file_path,
-            'total_amount' => $request->input('price'),
+            'transaction_id' => $request->input('transaction_id'),
+            'total_amount' => $request->input('total_amount'),
         ]);
 
 
@@ -82,10 +81,10 @@ class PaymentController extends Controller
      */
     public function show($id)
     {
-        // link to show page with good data and category data
-        $good = Good::find($id);
-        return view('payment.show')
-            ->with('payment',$payment);
+//        // link to show page with good data and category data
+//        $good = Good::find($id);
+//        return view('payment.show')
+//            ->with('payment',$payment);
 
     }
 
