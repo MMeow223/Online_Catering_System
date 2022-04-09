@@ -6,7 +6,7 @@ use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class PaymentController extends Controller
+class PaymentsController extends Controller
 {
     public function __construct()
     {
@@ -21,8 +21,8 @@ class PaymentController extends Controller
     public function index()
     {
         //link to index page
-        return view('payment.index')
-            ->with('payment', Payment::orderBy('created_at','DESC')->paginate(10));
+        return view('payments.index')
+            ->with('payments', Payment::orderBy('created_at','DESC')->paginate(10));
     }
 
     /**
@@ -58,7 +58,7 @@ class PaymentController extends Controller
 //        $table->string('account_number')->nullable();
 //        $table->string('transaction_id')->nullable();
 //        $table->string('total_amount');
-        DB::table('payment')->insert([
+        DB::table('payments')->insert([
             'payment_method' => $request->input('payment_method'),
             'account_number' => $request->input('account_number'),
             'transaction_id' => $request->input('transaction_id'),
@@ -67,7 +67,7 @@ class PaymentController extends Controller
 
 
         // redirect to index page
-        return redirect()->route('payment.index');
+        return redirect()->route('payments.index');
 
     }
 
@@ -81,8 +81,8 @@ class PaymentController extends Controller
     {
 //        // link to show page with good data and category data
 //        $good = Good::find($id);
-//        return view('payment.show')
-//            ->with('payment',$payment);
+//        return view('payments.show')
+//            ->with('payments',$payments);
 
     }
 

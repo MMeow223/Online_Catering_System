@@ -7,7 +7,7 @@
                 <div class="card shadow">
                     <div class="card-header">
                         <div class=" d-flex justify-content-between">
-                            <h3>{{ __('Payment') }}</h3>
+                            <h3>{{ __('Payments') }}</h3>
                         </div>
                     </div>
 
@@ -19,23 +19,23 @@
                                 <th>{{ __('Payment Method') }}</th>
                                 <th>{{ __('Account Number') }}</th>
                                 <th>{{ __('Transaction ID') }}</th>
-                                <th>{{ __('Total Amount') }}</th>
+                                <th>{{ __('Total Amount (RM)') }}</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($payment as $pay)
+                            @foreach ($payments as $payment)
                                 <tr>
-                                    <td>{{ $pay->payment_method }}</td>
-                                    <td>{{ $pay->account_number }}</td>
-                                    <td>{{ $pay->transaction_id }}</td>
-                                    <td>{{ $pay->total_amount }}</td>
+                                    <td>{{ $payment->payment_method }}</td>
+                                    <td>{{ $payment->account_number }}</td>
+                                    <td>{{ $payment->transaction_id }}</td>
+                                    <td>{{ $payment->total_amount }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
                     </div>
                     <div class="px-5">
-                        {{ $payment->links('pagination::bootstrap-5') }}
+                        {{ $payments->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>
