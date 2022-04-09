@@ -19,14 +19,28 @@ class OrdersSeeder extends Seeder
     {
         $users_id= DB::table('users')->pluck('id');
         for ($i = 1; $i <= 50; $i++) {
+//            create an array and generate a random number between 0 and 1, then put it in the array
+//            if the first number is 1, then generate another random number between 0 and 1, and put it in the array
+//            otherwise, put 0 in the array
+            $array = [];
+            $array[] = rand(0, 1);
+            if ($array[0] == 1) {
+                $array[] = rand(0, 1);
+            } else {
+                $array[] = 0;
+            }
+
+            // import faker
+            $faker = Factory::create();
 
             DB::table('orders')->insert([
                 'user_id' =>  $users_id[0],
-                'delivery_time' => now(),
-                'total_price' => random_int(1,999),
-                'payment_id' => $i,
-                'is_prepared' => true,
-                'is_delivered' => (bool)random_int(0, 1),
+                'delivery_time' => $faker->dateTimeBetween('-1 years', '+1 years'),
+                'total_price' => $faker->randomFloat(2, 0, 100),
+                // randomly assign the payment_id from the payment table
+                'payment_id' => array_rand(DB::table('payments')->pluck('id')->toArray()),
+                'is_prepared' => $array[0],
+                'is_delivered' => $array[1],
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

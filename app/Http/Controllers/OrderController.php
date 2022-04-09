@@ -25,7 +25,7 @@ class OrderController extends Controller
     {
         //link to index page
         return view('orders.index')
-            ->with('orders', Order::orderBy('is_delivered','ASC')->paginate(10));
+            ->with('orders', Order::orderBy('delivery_time','ASC')->paginate(10));
     }
 
     /**
