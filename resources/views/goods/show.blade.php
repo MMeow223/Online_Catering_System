@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div >
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card shadow">
@@ -32,10 +32,9 @@
                     </script>
 
                     <div class="card-body">
-
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="well"><img width="240" height="240" src="{{url("/images/$good->good_image")}}">
+                                <div class="well"><img width="400" height="400" src="{{url("/images/$good->good_image")}}">
                                     <br/>
                                     <br/>
                                     <br/>
@@ -47,34 +46,33 @@
                             <div class="col-md-8">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h3 class="well">{{ __($good->good_name) }}</h3>
+                                        <h3 class="well fs-3">{{ __($good->good_name) }}</h3>
                                     </div>
 
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <div class="well">Category:</div>
+                                        <div class="well fs-3">Category:</div>
                                     </div>
                                     <div class="col-md-9">
-                                        <div class="well"><option value="{{ $category->id }}">{{ $category->category_title }}</option></div>
+                                        <div class="well fs-3"><option value="{{ $category->id }}">{{ $category->category_title }}</option></div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <div class="well">Type:</div>
+                                        <div class="well fs-3">Type:</div>
                                     </div>
                                     <div class="col-md-9">
 
-                                        <p id = "type"></p>
+                                        <p class="well fs-3" id = "type"></p>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="well" id="description">{{ __($good->good_description) }}</div>
+                                    <div class="well fs-3" id="description">{{ __($good->good_description) }}</div>
                                 </div>
                                 <div class="row">
-
-                                    <select name="variety_select" id="variety_select"></select>
-                                    <div class="well">RM{{ __($good->good_price) }}</div>
+                                    <select class="form-control" name="variety_select" id="variety_select"></select>
+                                    <div class="well fs-3" id="Price">RM{{ __($good->good_price) }}</div>
                                 </div>
                                 <div class="row">
                                     <script>
@@ -87,8 +85,8 @@
 
                                     function decreaseValue() {
                                         let value = parseInt(document.getElementById('number').value, 10);
-                                    value = isNaN(value) ? 0 : value;
-                                    value < 1 ? value = 1 : '';
+                                    value = isNaN(value) ? 1 : value;
+                                    value < 2 ? value = 2 : '';
                                     value--;
                                     document.getElementById('number').value = value;
                                     }
@@ -97,7 +95,9 @@
                                         <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
                                         <input type="number" id="number" value="1" />
                                         <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+                                        <button class="btn btn-primary" id="AddtoCart" type="button">Add to Cart</button>
                                     </form>
+
                                 </div>
                             </div>
                         </div>

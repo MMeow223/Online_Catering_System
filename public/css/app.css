@@ -11350,7 +11350,7 @@ textarea.form-control-lg {
 form {
     width: 300px;
     margin: 0 auto;
-    text-align: center;
+    text-align: left;
     padding-top: 20px;
 }
 
@@ -11420,5 +11420,14 @@ input[type=number] {
 #variety_select{
     width:150px;
     margin-left: 10px;
-    text-align: center
+    text-align: center;
 }
+
+#AddtoCart{
+    width:150px;
+    margin-left: 10px;
+    text-align: center;
+    float: right;
+}
+
+
