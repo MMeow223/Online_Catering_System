@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
                 <div class="card shadow">
                     <div class="card-header">
                         <div class=" d-flex justify-content-between">
@@ -25,39 +23,34 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($orders as $order)
-                                <tr>
-                                    <td>{{ $order->user_id }}</td>
-                                    <td>{{ $order->delivery_time }}</td>
-                                    <td>{{ $order->total_price }}</td>
-                                    <td>{{ $order->payment_id }}</td>
-                                    <td>
-                                        <input type="radio" class="btn-check" name="preparation_option" value=1 id="preparation_outlined" autocomplete="off" @if($order->is_prepared) checked @endif disabled >
-                                        @if($order->is_prepared)
-                                            <label class="btn btn-outline-success" for="preparation_outlined">{{__('Prepared')}}</label>
-                                        @else
-                                            <label class="btn btn-outline-danger" for="preparation_outlined">{{__('Not Prepared')}}</label>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <input type="radio" class="btn-check" name="delivery_option" value=1 id="delivery_outlined" autocomplete="off" @if($order->is_delivered) checked @endif disabled >
-                                        @if($order->is_delivered)
-                                            <label class="btn btn-outline-success" for="delivery_outlined">{{__('Delivered')}}</label>
-                                        @else
-                                            <label class="btn btn-outline-danger" for="delivery_outlined">{{__('Not Delivered')}}</label>
-                                        @endif
-                                    </td>
+
+                            @if($orders->total()==0)
+                                <tr class="d-flex">
+                                    <td class="justify-content-center">{{ __('No orders found.') }}</td>
                                 </tr>
-                            @endforeach
+                            @else
+
+                                @foreach ($orders as $order)
+                                    <tr>
+                                        <td><a href="#">{{ $order->user_id }}</a></td>
+                                        <td>{{ $order->delivery_time }}</td>
+                                        <td>{{ $order->total_price }}</td>
+                                        <td><a href="#">{{ $order->payment_id }}</a></td>
+                                        <td>
+                                            <button class="btn @if($order->is_prepared) btn-success @else btn-outline-danger @endif" @if($order->is_prepared) checked @endif disabled>@if($order->is_prepared) {{__('Prepared')}} @else {{__('Preparing')}}@endif</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn @if($order->is_delivered) btn-success @else btn-outline-danger @endif" @if($order->is_delivered) checked @endif disabled>@if($order->is_delivered) {{__('Delivered')}} @else {{__('Delivering')}}@endif</button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
                             </tbody>
                         </table>
                     </div>
                     <div class="px-5">
-                        {{ $orders->links('pagination::bootstrap-5') }}awdasdawd
+                        {{ $orders->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
-            </div>
         </div>
-
-    </div>
 @endsection
