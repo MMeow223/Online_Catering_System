@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\GoodCategory;
-use App\Models\GoodVariety;
-use App\Models\Order;
+use App\Models\Payment;
 use Illuminate\Http\Request;
-use App\Models\Good;
 use Illuminate\Support\Facades\DB;
 
-class OrderController extends Controller
+class PaymentsController extends Controller
 {
     public function __construct()
     {
@@ -24,8 +21,8 @@ class OrderController extends Controller
     public function index()
     {
         //link to index page
-        return view('orders.index')
-            ->with('orders', Order::orderBy('is_delivered','ASC')->paginate(10));
+        return view('payments.index')
+            ->with('payments', Payment::orderBy('created_at','DESC')->paginate(10));
     }
 
     /**
@@ -36,13 +33,12 @@ class OrderController extends Controller
     public function create()
     {
         //link to create page
-        return view('orders.create')
-            ->with('categories', GoodCategory::all());
     }
 
     /**
      * Store a newly created resource in storage.
-     *
+     *$table->id()->unique();
+
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -50,32 +46,28 @@ class OrderController extends Controller
     {
         // validate the data
         $this->validate($request, [
-            'user_id' => 'required|max:255',
-            'delivery_time' => 'required|datetime',
-            'total_price' => 'required|max:255',
-            'payment_id' => 'required|integer',
-            'is_prepared' => 'required|boolean',
-            'is_delivered' => 'required|boolean',
-
+            'payment_method' => 'required|max:255',
+            'account_number' => 'required|numeric',
+            'transaction_id' => 'required|integer',
+            'total_amount' => 'required|numeric',
         ]);
 
         // create new good
+//        $table->timestamps();
+//        $table->string('payment_method');
+//        $table->string('account_number')->nullable();
+//        $table->string('transaction_id')->nullable();
+//        $table->string('total_amount');
         DB::table('payments')->insert([
-            'good_name' => $request->input('name'),
-            'good_description' => $request->input('description'),
-            'good_image' => $image_file_path,
-            'good_price' => $request->input('price'),
-            'good_category_id' => $request->input('category_id'),
-            'is_warm' => $request->input('food_type_option'),
-            'created_at' => now(),
-            'updated_at' => now(),
+            'payment_method' => $request->input('payment_method'),
+            'account_number' => $request->input('account_number'),
+            'transaction_id' => $request->input('transaction_id'),
+            'total_amount' => $request->input('total_amount'),
         ]);
 
-        // create the variety of the good
-        GoodVarietyController::staticStoreGoodVariety($request);
 
         // redirect to index page
-        return redirect()->route('orders.index');
+        return redirect()->route('payments.index');
 
     }
 
@@ -87,12 +79,11 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        // link to show page with good data and category data
-        $good = Good::find($id);
-        return view('goods.show')
-            ->with('good',$good)
-            ->with('category', GoodCategory::find($good->good_category_id))
-            ->with('varieties', GoodVariety::where('good_id', $id)->orderBy('is_available','DESC')->get());
+//        // link to show page with good data and category data
+//        $good = Good::find($id);
+//        return view('payments.show')
+//            ->with('payments',$payments);
+
     }
 
     /**
@@ -103,8 +94,7 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        // link to edit page with good data and category data
-;
+
     }
 
     /**
@@ -117,8 +107,6 @@ class OrderController extends Controller
      */
     public function update(Request $request,int $id)
     {
-        // validate the data
-
     }
 
     /**

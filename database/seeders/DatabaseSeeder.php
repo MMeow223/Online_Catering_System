@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             GoodsCategoriesSeeder::class,
             GoodsSeeder::class,
             GoodsVarietySeeder::class,
+            PaymentSeeder::class,
+            OrdersSeeder::class,
         ]);
     }
 }
