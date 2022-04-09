@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\GoodCategory;
-use App\Models\GoodVariety;
+use App\Models\Payment;
 use Illuminate\Http\Request;
-use App\Models\Good;
 use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
