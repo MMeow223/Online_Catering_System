@@ -81,7 +81,6 @@ class GoodsController extends Controller
     public function show($id)
     {
         $good = Good::find($id);
-        $good_varieties = GoodVariety::find($id);
         return view('goods.show')
             ->with('good',$good)
             ->with('category', GoodCategory::find($good->good_category_id))

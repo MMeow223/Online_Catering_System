@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="row">
                                     <select class="form-control" name="variety_select" id="variety_select"></select>
-                                    <div class="well fs-3" id="Price">RM{{ __($good->good_price) }}</div>
+                                    <div class="well fs-2" id="Price">RM{{ __($good->good_price) }}</div>
                                 </div>
                                 <div class="row">
                                     <script>
