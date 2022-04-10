@@ -12,18 +12,17 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
-Route::get('/', [\App\Http\Controllers\Controller::class,'index']);
+Route::get('/', [\App\Http\Controllers\Controller::class,'index'])->name('dashboard');
 // route resource for goods
 Route::resource('goods', \App\Http\Controllers\GoodsController::class);
 Route::resource('variety', \App\Http\Controllers\GoodVarietyController::class);
-
-
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\ProductViewController::class, 'productInfo'])->name('home');
 Route::resource('goods', \App\Http\Controllers\ProductViewController::class);
 
+
+//Route::get('/home', [App\Http\Controllers\ProductViewController::class, 'productInfo'])->name('home');
+//Route::get('/home', [App\Http\Controllers\ProductViewController::class, 'productInfo'])->name('home');
+Route::get('/filterCategory/{category_id}', [\App\Http\Controllers\Controller::class, 'filterGoodBasedOnCategory'])->name('filterCategory');
 
 

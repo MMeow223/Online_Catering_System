@@ -15,7 +15,7 @@
         </div>
 
         <div class="col-4">
-            <form action="{{ route('home') }}" method="GET" role="search">
+            <form action="{{route('dashboard')}}" method="GET" role="search">
                 <div class="input-group">
                     <input type="text" class="form-control" name="search"
                            placeholder="Search products" value="{{ request()->query('search') }}"> <span class="input-group-btn">
@@ -38,44 +38,23 @@
                     <ul class="navbar-nav text-center">
                         <li class="nav-item">
                             <h5>Categories</h5>
-                        <li class="nav-item">
-                            <a class="nav-link text-black" href="" >Category 2</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-black" href="#">Category 2</a>
+                            <a class="nav-link" href="/">All</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-black" href="#">Category 2</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-black" href="#">Category 3</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-black" href="#">Category 4</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-black" href="#">Category 5</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-black" href="#">Category 6</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-black" href="#">Category 7</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-black" href="#">Category 8</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-black" href="#">Category 9</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-black" href="#">Category 10</a>
-                        </li>
+                        @foreach($categories as $category)
+                            <li class="nav-item">
+                                <a class="nav-link px-3 @if($category->id == explode('/',request()->path())[1]) fs-4 @endif {{ (request()->is('/filterCategory/'.$category->id)) ? 'fs-4' : '' }} " href="{{ route('filterCategory', $category->id) }}">{{ $category->category_title }}</a>
+                            </li>
+                        @endforeach
                     </ul>
             </nav>
         </div>
 
         <div class="col-10">
+
+            <h1 class="row m-3">Show result(s) of @if(request()->is('/')) All Category  @else "{{$current_category_name}}" @endif</h1>
+
             <div class="row">
                 @forelse ($products as $product)
                     <div class="col-3 ">
