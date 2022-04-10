@@ -35,7 +35,7 @@
                                         <td><a href="#">{{ $order->user_id }}</a></td>
                                         <td>{{ $order->delivery_time }}</td>
                                         <td>{{ $order->total_price }}</td>
-                                        <td><a href="#">{{ $order->payment_id }}</a></td>
+                                        <td><a href="{{ route('payments.show', $order->payment_id)}}">{{ $order->payment_id }}</a></td>
                                         <td>
                                             <button class="btn @if($order->is_prepared) btn-success @else btn-outline-danger @endif" @if($order->is_prepared) checked @endif disabled>@if($order->is_prepared) {{__('Prepared')}} @else {{__('Preparing')}}@endif</button>
                                         </td>

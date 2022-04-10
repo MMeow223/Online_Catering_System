@@ -38,7 +38,7 @@ class OrdersSeeder extends Seeder
                 'delivery_time' => $faker->dateTimeBetween('-1 years', '+1 years'),
                 'total_price' => $faker->randomFloat(2, 0, 100),
                 // randomly assign the payment_id from the payment table
-                'payment_id' => array_rand(DB::table('payments')->pluck('id')->toArray()),
+                'payment_id' => $i,
                 'is_prepared' => $array[0],
                 'is_delivered' => $array[1],
                 'created_at' => now(),
