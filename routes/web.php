@@ -1,5 +1,5 @@
 <?php
-//foasnofno
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +19,11 @@ Route::resource('goods', \App\Http\Controllers\GoodsController::class);
 Route::resource('variety', \App\Http\Controllers\GoodVarietyController::class);
 
 
+
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\ProductViewController::class, 'productInfo'])->name('home');
+Route::resource('goods', \App\Http\Controllers\ProductViewController::class);
+
+
+
