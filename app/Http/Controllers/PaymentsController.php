@@ -83,6 +83,9 @@ class PaymentsController extends Controller
 //        $good = Good::find($id);
 //        return view('payments.show')
 //            ->with('payments',$payments);
+        $payment = Payment::find($id);
+        return view('payments.show')
+            ->with('payment',$payment);
 
     }
 
