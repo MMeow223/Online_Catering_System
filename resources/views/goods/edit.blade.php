@@ -12,6 +12,7 @@
                             <h5 class="d-inline">{{ __('Edit Good Details') }}</h5>
                             <small class="text-muted d-inline"> (Edit details of good - <i>{{$good->good_name}}</i>)</small>
                         </div>
+
                         <div>
                             {{ Form::hidden('_method', 'PUT') }}
                             {{ Form::submit('Update', ['class' => 'btn btn-primary float-right']) }}
