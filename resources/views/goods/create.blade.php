@@ -8,7 +8,12 @@
             <div class="col-md-8">
                 <div class="card shadow">
                     <div class="card-header d-flex justify-content-between">
-                        <h5 class="my-auto">{{ __('Good Details') }}</h5>
+
+                        <div class="my-auto">
+                            <h5 class="d-inline">{{ __('Create Good') }}</h5>
+                            <small class="text-muted d-inline"> (Create a new good)</small>
+                        </div>
+
                         <div>
                             {{ Form::submit('Create', ['class' => 'btn btn-primary float-right']) }}
                             <a href="{{ url()->previous() }}" class="btn btn-secondary float-right">{{ __('Back') }}</a>

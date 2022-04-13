@@ -22,7 +22,6 @@ return new class extends Migration
             $table->unsignedBigInteger('payment_id');
             $table->boolean('is_prepared')->default(false);
             $table->boolean('is_delivered')->default(false);
-
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

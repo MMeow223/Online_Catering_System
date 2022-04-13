@@ -7805,6 +7805,7 @@ textarea.form-control-lg {
   --bs-text-opacity: 1;
 }
 
+
 .bg-blue{
     background-color: #52accc;
 }
@@ -11349,19 +11350,26 @@ textarea.form-control-lg {
   background-color: transparent;
 }
 
-:root {
-    --offcanvas-width: 276px;
-    --topNavbarHeight: 55px;
-}
-.menu-hover {
-    color: #000000;
+  --offcanvas-width: 276px;
+  --topNavbarHeight: 55px;
 }
 
-.sidebar-nav{
-    width: var(--offcanvas-width);
-    transform:none;
+.menu-hover:hover {
+  color: #000000;
+}
+
+.sidebar-nav {
+  width: var(--offcanvas-width);
+  transform: none;
+  visibility: visible !important;
+  top: var(--topNavbarHeight);
+  height: calc(100% - var(--topNavbarHeight));
+}
+
+@media (min-width: 992px) {
+  .sidebar-nav {
+    transform: none;
     visibility: visible !important;
-    top:var(--topNavbarHeight);
-    height: calc(100% - var(--topNavbarHeight));
+  }
 }
 

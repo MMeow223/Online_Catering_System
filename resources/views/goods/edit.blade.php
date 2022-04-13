@@ -8,7 +8,11 @@
             <div class="col-md-8">
                 <div class="card shadow">
                     <div class="card-header d-flex justify-content-between">
-                        <h5 class="my-auto">{{ __('Good Details') }}</h5>
+                        <div class="my-auto">
+                            <h5 class="d-inline">{{ __('Edit Good Details') }}</h5>
+                            <small class="text-muted d-inline"> (Edit details of good - <i>{{$good->good_name}}</i>)</small>
+                        </div>
+
                         <div>
                             {{ Form::hidden('_method', 'PUT') }}
                             {{ Form::submit('Update', ['class' => 'btn btn-primary float-right']) }}

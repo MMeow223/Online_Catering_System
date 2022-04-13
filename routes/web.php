@@ -18,7 +18,10 @@ Route::get('/', [\App\Http\Controllers\Controller::class,'index'])->name('dashbo
 // route resource for goods
 Route::resource('goods', \App\Http\Controllers\GoodsController::class);
 Route::resource('variety', \App\Http\Controllers\GoodVarietyController::class);
-Route::resource('goods', \App\Http\Controllers\ProductViewController::class);
+
+Route::resource('payments', \App\Http\Controllers\PaymentsController::class);
+Route::resource('orders', \App\Http\Controllers\OrderController::class);
+Route::resource('users', \App\Http\Controllers\UsersController::class);
 
 
 //Route::get('/home', [App\Http\Controllers\ProductViewController::class, 'productInfo'])->name('home');

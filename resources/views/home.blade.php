@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <div class="container-fluid p-4 bg-warning sticky-top">
     <div class="row">
 
@@ -23,6 +24,7 @@
                             <span class="glyphicon glyphicon-search"></span>
                         </button>
                     </span>
+
                 </div>
             </form>
         </div>
