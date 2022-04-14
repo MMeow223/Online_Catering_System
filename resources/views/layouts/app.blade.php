@@ -195,7 +195,7 @@
                 </div>
                 <div class="row d-flex justify-content-around">
 
-                    <h1 class="col-3 text-center">PinoCone</h1>
+                    <h1 class="col-3 text-center"><a class="text-black text-decoration-none" href="/">PinoCone</a></h1>
 
                     <form action="{{route('dashboard')}}" method="GET" role="search" class="col-8">
                         <div class="input-group  mt-1">

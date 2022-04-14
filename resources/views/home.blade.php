@@ -47,7 +47,7 @@
             <div class="row">
                 @forelse ($products as $product)
                     <div class="col-3 ">
-                        <a href="#" class="d-inline text-decoration-none">
+                        <a href="/view/goods/{{$product->id}}}" class="d-inline text-decoration-none">
                             <div class="card m-3 shadow">
                                 {{--                                <img class="card-img-top" src="https://www.thespruceeats.com/thmb/TLsKoV2dAENurB0yOSUnEzHYU_4=/1333x1000/smart/filters:no_upscale()/taiwanese-beef-noodle-soup-4777014-hero-01-e06a464badec476684e513cad44612da.jpg" alt="Card image" style="width:100%">--}}
                                 <img class="card-img-top" src="{{url("/images/$product->good_image")}}" alt="Image of {{ $product->good_name }}" style="width:100%">
