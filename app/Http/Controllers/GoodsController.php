@@ -165,4 +165,14 @@ class GoodsController extends Controller
         return redirect()->route('goods.index')
             ->with('success','Good deleted');
     }
+
+    public function view($id){
+        $good = Good::find($id);
+        return view('good-individual')
+            ->with('products',Good::paginate(40))
+            ->with('good',$good)
+            ->with('category', GoodCategory::find($good->good_category_id))
+            ->with('varieties', GoodVariety::where("good_id",$id)->get());
+    }
+
 }

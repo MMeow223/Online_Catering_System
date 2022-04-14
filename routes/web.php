@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\Controller::class,'index']);
 // route resource for goods
 Route::resource('goods', \App\Http\Controllers\GoodsController::class);
-
+Route::get('/view/goods/{id}', [\App\Http\Controllers\GoodsController::class, 'view']);
 
 Auth::routes();
 
