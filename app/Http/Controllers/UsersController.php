@@ -113,7 +113,6 @@ class UsersController extends Controller
         $this->validate($request, [
             'username' => 'required',
             'email' => 'required',
-            'password' => 'required|max:255|confirmed',
         ]);
 
         // update user
@@ -122,7 +121,6 @@ class UsersController extends Controller
             ->update([
                 'username' => $request->input('username'),
                 'email' => $request->input('email'),
-                'password' => $request->input('password'),
                 'updated_at' => now(),
                 // actually it will update this column automatically,
                 // but we want to make sure the query is executed,
