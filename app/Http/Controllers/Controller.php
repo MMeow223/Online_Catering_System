@@ -52,4 +52,6 @@ class Controller extends BaseController
             ->with('current_category_name', $current_category_name);
 
     }
+
+
 }

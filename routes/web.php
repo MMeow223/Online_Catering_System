@@ -17,6 +17,9 @@ Auth::routes();
 Route::get('/', [\App\Http\Controllers\Controller::class,'index'])->name('dashboard');
 // route resource for goods
 Route::resource('goods', \App\Http\Controllers\GoodsController::class);
+
+Route::get('/view/goods/{id}', [\App\Http\Controllers\GoodsController::class, 'view']);
+
 Route::resource('variety', \App\Http\Controllers\GoodVarietyController::class);
 
 Route::resource('payments', \App\Http\Controllers\PaymentsController::class);
@@ -27,5 +30,6 @@ Route::resource('users', \App\Http\Controllers\UsersController::class);
 //Route::get('/home', [App\Http\Controllers\ProductViewController::class, 'productInfo'])->name('home');
 //Route::get('/home', [App\Http\Controllers\ProductViewController::class, 'productInfo'])->name('home');
 Route::get('/filterCategory/{category_id}', [\App\Http\Controllers\Controller::class, 'filterGoodBasedOnCategory'])->name('filterCategory');
+
 
 

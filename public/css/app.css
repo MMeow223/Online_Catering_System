@@ -11346,6 +11346,90 @@ textarea.form-control-lg {
   background-color: transparent;
 }
 
+/*increase decrease button for individual goods quantity*/
+form {
+    width: 300px;
+    margin: 0 auto;
+    text-align: left;
+    padding-top: 20px;
+}
+
+.value-button {
+    display: inline-block;
+    border: 1px solid #ddd;
+    margin: 0px;
+    width: 40px;
+    height: 35px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 5px 0;
+    background: #eee;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.value-button:hover {
+    cursor: pointer;
+}
+
+form #decrease {
+    margin-right: -4px;
+    border-radius: 8px 0 0 8px;
+}
+
+form #increase {
+    margin-left: -4px;
+    border-radius: 0 8px 8px 0;
+}
+
+form #input-wrap {
+    margin: 0px;
+    padding: 0px;
+}
+
+input#number {
+    text-align: center;
+    border: none;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin: 0px;
+    width: 40px;
+    height: 40px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+#description {
+    color:grey;
+}
+
+#variety_select{
+    width:150px;
+    margin-left: 10px;
+    text-align: center;
+}
+
+#AddtoCart{
+    width:150px;
+    margin-left: 10px;
+    text-align: center;
+    float: right;
+}
+
 :root {
   --offcanvas-width: 276px;
   --topNavbarHeight: 55px;
@@ -11369,3 +11453,4 @@ textarea.form-control-lg {
     visibility: visible !important;
   }
 }
+
