@@ -11430,4 +11430,27 @@ input[type=number] {
     float: right;
 }
 
+:root {
+  --offcanvas-width: 276px;
+  --topNavbarHeight: 55px;
+}
+
+.menu-hover:hover {
+  color: #000000;
+}
+
+.sidebar-nav {
+  width: var(--offcanvas-width);
+  transform: none;
+  visibility: visible !important;
+  top: var(--topNavbarHeight);
+  height: calc(100% - var(--topNavbarHeight));
+}
+
+@media (min-width: 992px) {
+  .sidebar-nav {
+    transform: none;
+    visibility: visible !important;
+  }
+}
 

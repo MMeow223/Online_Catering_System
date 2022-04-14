@@ -1,3 +1,4 @@
+
 .btn-outline-warm {
     color: #f8872c;
     border-color: #f8872c;
@@ -48,5 +49,37 @@
 .btn-outline-cold:disabled, .btn-outline-cold.disabled {
     color: #48baff;
     background-color: transparent;
+}
+
+
+:root {
+    --offcanvas-width: 276px;
+    --topNavbarHeight: 55px;
+}
+//.menu-hover {
+//    color: #000000;
+//}
+.menu-hover:hover {
+    color: #000000;
+}
+.sidebar-nav {
+    width: var(--offcanvas-width);
+    transform:none;
+    visibility: visible !important;
+    top: var(--topNavbarHeight);
+    height: calc(100% - var(--topNavbarHeight));
+}
+
+//.sidebar-nav{
+//    width: var(--offcanvas-width);
+//    top:var(--topNavbarHeight);
+//    height: calc(100% - var(--topNavbarHeight));
+//}
+
+@media (min-width: 992px){
+    .sidebar-nav{
+        transform:none;
+        visibility: visible !important;
+    }
 }
 

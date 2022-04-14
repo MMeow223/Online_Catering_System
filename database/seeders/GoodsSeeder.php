@@ -15,14 +15,13 @@ class GoodsSeeder extends Seeder
      */
     public function run()
     {
-
         for ($i = 1; $i <= 50; $i++) {
             $good_category_id = DB::table('good_categories')->get()->random()->id;
 
             DB::table('goods')->insert([
                 'good_name' => 'Noodle'.$i,
                 'good_description' => 'This is a bowl of noodle'.$i,
-                'good_image' => 'noodle.jpg',
+                'good_image' => 'default.jpg',
                 'good_price' => '10',
                 'good_category_id' => $good_category_id,
                 'is_warm' => true,
