@@ -4,8 +4,12 @@
         <div class="row justify-content-center">
                 <div class="card shadow">
                     <div class="card-header">
-                        <div class=" d-flex justify-content-between">
-                            <h3>{{ __('Payments') }}</h3>
+                        <div class=" d-flex justify-content-start">
+                            <div>
+                                <h3 class="d-inline">{{ __('Payment') }}</h3>
+                                <small class="text-muted d-inline"> (View all payment received)</small>
+                            </div>
+
                         </div>
                     </div>
 

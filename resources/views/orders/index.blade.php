@@ -5,7 +5,10 @@
                 <div class="card shadow">
                     <div class="card-header">
                         <div class=" d-flex justify-content-between">
-                            <h3>{{ __('Orders') }}</h3>
+                            <div>
+                                <h3 class="d-inline">{{ __('Orders') }}</h3>
+                                <small class="text-muted d-inline"> (View all order created and its delivery status)</small>
+                            </div>
                         </div>
                     </div>
 
@@ -32,7 +35,7 @@
 
                                 @foreach ($orders as $order)
                                     <tr>
-                                        <td><a href="#">{{ $order->user_id }}</a></td>
+                                        <td><a href="{{ route('users.show', $order->user_id) }}">{{ $order->user_id }}</a></td>
                                         <td>{{ $order->delivery_time }}</td>
                                         <td>{{ $order->total_price }}</td>
                                         <td><a href="{{ route('payments.show', $order->payment_id)}}">{{ $order->payment_id }}</a></td>

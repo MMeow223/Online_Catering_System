@@ -9,7 +9,7 @@
                         <div class=" d-flex justify-content-between">
                             <div>
                                 <h3 class="d-inline">{{ __('User') }}</h3>
-                                <small class="text-muted d-inline"> (View all goods name, price, and description)</small>
+                                <small class="text-muted d-inline"> (View all registered accounts)</small>
                             </div>
                             <div>
                                 <a href="{{ route('users.create') }}"
@@ -32,7 +32,6 @@
                             <tr>
                                 <th>{{ __('Username') }}</th>
                                 <th>{{ __('Email') }}</th>
-                                <th>{{ __('Password') }}</th>
                                 <th>{{ __('Owner ID') }}</th>
                                 <th>{{ __('Last Updated') }}</th>
                             </tr>
@@ -42,7 +41,6 @@
                                 <tr>
                                     <td>{{ $user->username }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>********</td>
                                     <td>{{ $user->owner_id }}</td>
                                     <td>{{ $user->updated_at}}</td>
                                     <td>
@@ -80,7 +78,4 @@
                     </div>
                 </div>
             </div>
-{{--        </div>--}}
-
-{{--    </div>--}}
 @endsection
