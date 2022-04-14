@@ -141,61 +141,65 @@
                 </div>
             </nav>
         @else
-            <div class="container-fluid p-4 bg-warning sticky-top">
-                <div class="row mx-5">
-                    <div class="  d-flex justify-content-end">
-                        <a href="#" class="text-black me-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
-                                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
-                            </svg>
-                            Notification
-                        </a>
-                        <a href="#" class="text-black  me-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                            </svg>
-                            Profile
-                        </a>
-                        <a href="#" class="text-black  me-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
-                            </svg>
-                            About
-                        </a>
-                        <a href="#" class="text-black  me-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
-                            </svg>
-                            Help
-                        </a>
-                        <a id="navbarDropdown" class="text-decoration-none dropdown-toggle text-white" href="#"
-                           role="button"
-                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            <input class="rounded text-white" type="text" value="{{ Auth::user()->username }}"
-                                   disabled/>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
+            <div class="container-fluid row pt-2 pb-3 m-auto bg-warning sticky-top shadow">
+                <h1 class=" col-4 text-center">
+                    <a class="text-black fw-bold text-decoration-none" style="font-size: 1.5em" href="/">
+                        PinoCone
+                    </a>
+                </h1>
+                <div class="col-8">
+                    <div class="row">
+                        <div class="  d-flex justify-content-end">
+                            <a href="#" class="text-black me-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+                                </svg>
+                                Notification
+                            </a>
+                            <a href="#" class="text-black  me-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                                </svg>
+                                Profile
+                            </a>
+                            <a href="#" class="text-black  me-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                                About
+                            </a>
+                            <a href="#" class="text-black  me-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                                </svg>
+                                Help
+                            </a>
+                            <a id="navbarDropdown" class="text-decoration-none dropdown-toggle text-white" href="#"
+                               role="button"
+                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <input class="rounded text-white" type="text" value="{{ Auth::user()->username }}"
+                                       disabled/>
                             </a>
 
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="row d-flex justify-content-around">
-
-                    <h1 class="col-3 text-center"><a class="text-black text-decoration-none" href="/">PinoCone</a></h1>
 
                     <form action="{{route('dashboard')}}" method="GET" role="search" class="col-8">
                         <div class="input-group  mt-1">
@@ -209,6 +213,7 @@
                         </div>
                     </form>
                 </div>
+
             </div>
         @endif
     @endif
@@ -313,5 +318,63 @@
             </div>
     </main>
 </div>
+
+@if(!auth()->guest() AND !auth()->user()->is_admin)
+    <hr>
+    <div class="container bg-light p-5 ">
+        <div class="row" >
+            <div class="col-sm-4 bg-light p-0">
+                <div class="text-secondary row">
+                    <h5>Dashboard</h5>
+
+                    <ul class="nav nav-pills flex-column">
+                        <li class="ps-4 nav-item">
+                            <a class="text-black" href="#">Home</a>
+                        </li>
+                        <li class="ps-4 nav-item">
+                            <a class="text-black" href="#">Profile</a>
+                        </li>
+                        <li class="ps-4 nav-item">
+                            <a class="text-black" href="#">Navigation</a>
+                        </li>
+                        <li class="ps-4 nav-item">
+                            <a class="text-black" href="#">Delivering Tab</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-sm-4 bg-light p-0">
+                <div class="text-secondary row">
+                    <h5>About Pinocone</h5>
+
+                    <ul class="nav nav-pills flex-column">
+                        <li class="ps-4 nav-item">
+                            <a class="text-black" href="#">About Us</a>
+                        </li>
+                        <li class="ps-4 nav-item">
+                            <a class="text-black" href="#">Policies</a>
+                        </li>
+                        <li class="ps-4 nav-item">
+                            <a class="text-black" href="#">Disclaimer</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="col-sm-4 bg-light p-0">
+                <div class="text-secondary row"><h5>Payment</h5></div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="container bg-light px-4 ">
+        <div class="d-flex justify-content-center">
+            <p>© 2022 Pinocone. All Rights Reserved.</p>
+        </div>
+    </div>
+@endif
+
 </body>
 </html>

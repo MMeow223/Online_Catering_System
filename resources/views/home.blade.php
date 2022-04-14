@@ -42,7 +42,19 @@
 
         <div class="col-10">
 
-            <h1 class="row m-3">Show result(s) of @if(request()->is('/')) All Category  @else "{{$current_category_name}}" @endif</h1>
+            <h1 class="row m-3">
+                Show result(s) of
+                @if($search_item == null)
+                    @if(request()->is('/'))
+                        All Category
+                    @else
+                        "{{$current_category_name}}"
+                    @endif
+
+                @else
+                    "{{$search_item}}"
+                @endif
+            </h1>
 
             <div class="row">
                 @forelse ($products as $product)
@@ -80,59 +92,4 @@
 
 </div>
 
-<hr>
-<div class="container bg-light p-5 ">
-    <div class="row justify-content-around" >
-        <div class="col-sm-4 bg-light p-0">
-            <div class="text-secondary row">
-                <h5>Dashboard</h5>
-
-                <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link text-black" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-black" href="#">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-black" href="#">Navigation</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-black" href="#">Delivering Tab</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="col-sm-4 bg-light p-0">
-            <div class="text-secondary row">
-                <h5>About Pinocone</h5>
-
-                <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link text-black" href="#">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-black" href="#">Policies</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-black" href="#">Disclaimer</a>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-
-        <div class="col-sm-4 bg-light p-0">
-            <div class="text-secondary row"><h5>Payment</h5></div>
-
-        </div>
-    </div>
-</div>
-<hr>
-<div class="container bg-light px-4 ">
-    <div class="row justify-content-around">
-        <p>© 2022 Pinocone. All Rights Reserved.</p>
-    </div>
-</div>
 @endsection

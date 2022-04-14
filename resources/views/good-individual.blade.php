@@ -9,7 +9,7 @@
             <div class="col">
 
                 <img class="d-flex m-3 shadow-lg rounded" width="400"
-                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Fresh_ramen_noodle_001.jpg/800px-Fresh_ramen_noodle_001.jpg">
+                     src="{{url("/images/$good->good_image")}}">
             </div>
             <div class="col">
 {{--                <div class="col-md-8">--}}
