@@ -7805,10 +7805,6 @@ textarea.form-control-lg {
   --bs-text-opacity: 1;
 }
 
-
-.bg-blue{
-    background-color: #52accc;
-}
 .bg-primary {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
@@ -11350,6 +11346,7 @@ textarea.form-control-lg {
   background-color: transparent;
 }
 
+:root {
   --offcanvas-width: 276px;
   --topNavbarHeight: 55px;
 }
@@ -11372,4 +11369,3 @@ textarea.form-control-lg {
     visibility: visible !important;
   }
 }
-

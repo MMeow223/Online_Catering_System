@@ -3,35 +3,8 @@
 @section('content')
 
 
-<div class="container-fluid p-4 bg-warning sticky-top">
-    <div class="row">
 
-        <div class="col-3 text-center"><h1>Pinocone</h1></div>
 
-        <div class="col-4">
-            <a href="/home" class="btn btn-outline-dark m-1">Home</a>
-            <a href=# class="btn btn-outline-dark m-1">Profile</a>
-            <a href=# class="btn btn-outline-dark m-1">Notification</a>
-            <a href=# class="btn btn-outline-dark m-1">Delivering Tab</a>
-        </div>
-
-        <div class="col-4">
-            <form action="{{route('dashboard')}}" method="GET" role="search">
-                <div class="input-group">
-                    <input type="text" class="form-control" name="search"
-                           placeholder="Search products" value="{{ request()->query('search') }}"> <span class="input-group-btn">
-                        <button type="submit" class="btn btn-default">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
-
-                </div>
-            </form>
-        </div>
-
-        <div class="col-1"><a href=# class="btn">Cart</a></div>
-    </div>
-</div>
 
 <div class="container">
     <div class="row">
@@ -39,14 +12,28 @@
             <nav class="navbar bg-light pt-5">
                     <ul class="navbar-nav text-center">
                         <li class="nav-item">
-                            <h5>Categories</h5>
+                            <h5 class="fw-bold text-decoration-underline">
+                                Categories
+                            </h5>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/">All</a>
+                            <a class="nav-link" href="/">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
+                                    <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z"/>
+                                    <path d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z"/>
+                                </svg>
+                                All Categories
+                            </a>
                         </li>
                         @foreach($categories as $category)
-                            <li class="nav-item">
-                                <a class="nav-link px-3 @if($category->id == explode('/',request()->path())[1]) fs-4 @endif {{ (request()->is('/filterCategory/'.$category->id)) ? 'fs-4' : '' }} " href="{{ route('filterCategory', $category->id) }}">{{ $category->category_title }}</a>
+                            <li class="nav-item d-flex justify-content-start">
+                                <a class="nav-link px-3 @if($category->id == explode('/',request()->path())[1]) fs-4 @endif {{ (request()->is('/filterCategory/'.$category->id)) ? 'fs-4' : '' }} " href="{{ route('filterCategory', $category->id) }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
+                                        <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z"/>
+                                        <path d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z"/>
+                                    </svg>
+                                    {{ $category->category_title }}
+                                </a>
                             </li>
                         @endforeach
                     </ul>
@@ -62,7 +49,8 @@
                     <div class="col-3 ">
                         <a href="#" class="d-inline text-decoration-none">
                             <div class="card m-3 shadow">
-                                <img class="card-img-top" src="https://www.thespruceeats.com/thmb/TLsKoV2dAENurB0yOSUnEzHYU_4=/1333x1000/smart/filters:no_upscale()/taiwanese-beef-noodle-soup-4777014-hero-01-e06a464badec476684e513cad44612da.jpg" alt="Card image" style="width:100%">
+                                {{--                                <img class="card-img-top" src="https://www.thespruceeats.com/thmb/TLsKoV2dAENurB0yOSUnEzHYU_4=/1333x1000/smart/filters:no_upscale()/taiwanese-beef-noodle-soup-4777014-hero-01-e06a464badec476684e513cad44612da.jpg" alt="Card image" style="width:100%">--}}
+                                <img class="card-img-top" src="{{url("/images/$product->good_image")}}" alt="Image of {{ $product->good_name }}" style="width:100%">
 
                                 <div class="card-body">
                                     <h4 class="card-title text-black">{{ $product->good_name }}</h4>

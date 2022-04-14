@@ -15,13 +15,23 @@ class GoodsCategoriesSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i <= 10; $i++) {
+        // create an array with different good category
+        $goodsCategories = ['Malaysian','English', 'American', 'Chinese', 'Japanese', 'Korean', 'Indian',  'Snack', 'Other'];
+        for($i = 0; $i < count($goodsCategories); $i++) {
             DB::table('good_categories')->insert([
-                'category_title' => 'Category ' . $i,
-                'category_description' => 'Category ' . $i . ' description',
+                'category_title' => $goodsCategories[$i],
+                'category_description' => 'Category ' . $goodsCategories[$i] . ' description',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
         }
+//        for ($i = 1; $i <= 10; $i++) {
+//            DB::table('good_categories')->insert([
+//                'category_title' => 'Category ' . $i,
+//                'category_description' => 'Category ' . $i . ' description',
+//                'created_at' => now(),
+//                'updated_at' => now(),
+//            ]);
+//        }
     }
 }
