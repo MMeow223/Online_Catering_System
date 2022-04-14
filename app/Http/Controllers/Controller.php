@@ -38,7 +38,8 @@ class Controller extends BaseController
 
             return view('home')
                 ->with('products', $products)
-                ->with('categories', GoodCategory::all());
+                ->with('categories', GoodCategory::all())
+                ->with('search_item',$search);
 
         }
     }
@@ -49,8 +50,8 @@ class Controller extends BaseController
         return view('home')
             ->with('products', $products)
             ->with('categories', GoodCategory::all())
-            ->with('current_category_name', $current_category_name);
-
+            ->with('current_category_name', $current_category_name)
+            ->with('search_item',null);
     }
 
 

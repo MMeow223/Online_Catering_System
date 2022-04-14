@@ -3,14 +3,13 @@
 @section('content')
     <div class="container">
         {{--        <div class="">--}}
-        <div class="row shadow-lg p-5 mt-3" style="padding-bottom: 200px !important; padding-top: 100px !important;">
+        <div class="row shadow-lg p-5 mt-3" style="padding-bottom: 200px !important; ">
             <h2 class="toast-body bg-warning fw-bold rounded">Displaying {{ __($good->good_name) }}</h2>
 
             <div class="col">
 
                 <img class="d-flex m-3 shadow-lg rounded" width="400"
-                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Fresh_ramen_noodle_001.jpg/800px-Fresh_ramen_noodle_001.jpg">
-                {{--                    <img class="d-flex m-3" width="300" src="{{url("/images/$good->good_image")}}">--}}
+                     src="{{url("/images/$good->good_image")}}">
             </div>
             <div class="col">
 {{--                <div class="col-md-8">--}}
