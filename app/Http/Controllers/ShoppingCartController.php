@@ -28,6 +28,7 @@ class ShoppingCartController extends Controller
             ->get();
 
 //        dd($cart_items);
+        //
         return view('cart.index')
             ->with('cart_items', $cart_items);
     }
