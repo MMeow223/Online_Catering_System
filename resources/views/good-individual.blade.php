@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+
         {{--        <div class="">--}}
         <div class="row shadow-lg p-5 mt-3" style="padding-bottom: 200px !important; ">
             <h2 class="toast-body bg-warning fw-bold rounded">Displaying {{ __($good->good_name) }}</h2>
@@ -12,27 +13,29 @@
                      src="{{url("/images/$good->good_image")}}">
             </div>
             <div class="col">
-{{--                <div class="col-md-8">--}}
-                    <div class="row">
-                        <h4 class="col-md-4 fw-bold">Name </h4>
-                        <h4 class="col-md-8">: {{ __($good->good_name) }}</h4>
-                    </div>
+                {{--                <div class="col-md-8">--}}
+                <div class="row">
+                    <h4 class="col-md-4 fw-bold">Name </h4>
+                    <h4 class="col-md-8">: {{ __($good->good_name) }}</h4>
+                </div>
 
-                    <div class="row">
-                        <h4 class="col-md-4 fw-bold">Category </h4>
-                        <h4 class="col-md-8">: {{ $category->category_title }}</h4>
-                    </div>
+                <div class="row">
+                    <h4 class="col-md-4 fw-bold">Category </h4>
+                    <h4 class="col-md-8">: {{ $category->category_title }}</h4>
+                </div>
 
-                    <div class="row">
-                        <h4 class="col-md-4 fw-bold">Type</h4>
-                        <h4 class="col-md-8" id="type">: @if($good->is_warm) Warm @else Cold @endif</h4>
-                    </div>
+                <div class="row">
+                    <h4 class="col-md-4 fw-bold">Type</h4>
+                    <h4 class="col-md-8" id="type">: @if($good->is_warm) Warm @else Cold @endif</h4>
+                </div>
 
-                    <div class="row">
-                        <h4 class="col-md-4 fw-bold">Description</h4>
-                        <h4 class="col-md-8" id="type">: {{ __($good->good_description) }}</h4>
-                    </div>
-
+                <div class="row">
+                    <h4 class="col-md-4 fw-bold">Description</h4>
+                    <h4 class="col-md-8" id="type">: {{ __($good->good_description) }}</h4>
+                </div>
+                <form action="{{route('cart.store')}}" method="post">
+                    @csrf
+                    <input type="hidden" name="good_id" value="{{$good->id}}">
                     <div class="row">
                         <h4 class="col-md-4 fw-bold">Variety</h4>
 
@@ -43,7 +46,8 @@
                                     @foreach($varieties as $variety)
 
                                         <div class="col-4 form-check  me-4">
-                                            <input class="form-check-input fs-5" type="radio" name="variety-radio" id="variety-radio-{{$variety->id}}">
+                                            <input class="form-check-input fs-5" type="radio" name="variety-radio"
+                                                   id="variety-radio-{{$variety->id}}" value="{{$variety->id}}">
                                             <label class="form-check-label fs-5" for="variety-radio-{{$variety->id}}">
                                                 {{$variety->variety_name}}
                                             </label>
@@ -65,19 +69,18 @@
                     <h1>RM{{ __($good->good_price) }}</h1>
 
                     <div class="row">
-                        <form>
-                            <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-
-                            </div>
-                            <input type="number" id="number" value="1"/>
-                            <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+
-                            </div>
-                            <button class="btn btn-primary" id="AddtoCart" type="button">Add to Cart</button>
-                        </form>
-
+                        <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-
+                        </div>
+                        <input type="number" name="quantity" id="number" value="1"/>
+                        <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+
+                        </div>
+                        <button class="btn btn-primary" id="AddtoCart" type="submit" >Add to Cart</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
+    </div>
+
 
     <div class="container col-10">
 
@@ -89,7 +92,8 @@
                     <a href="/view/goods/{{$product->id}}" class="d-inline text-decoration-none">
                         <div class="card m-3 shadow">
                             {{--                                <img class="card-img-top" src="https://www.thespruceeats.com/thmb/TLsKoV2dAENurB0yOSUnEzHYU_4=/1333x1000/smart/filters:no_upscale()/taiwanese-beef-noodle-soup-4777014-hero-01-e06a464badec476684e513cad44612da.jpg" alt="Card image" style="width:100%">--}}
-                            <img class="card-img-top" src="{{url("/images/$product->good_image")}}" alt="Image of {{ $product->good_name }}" style="width:100%">
+                            <img class="card-img-top" src="{{url("/images/$product->good_image")}}"
+                                 alt="Image of {{ $product->good_name }}" style="width:100%">
 
                             <div class="card-body">
                                 <h4 class="card-title text-black">{{ $product->good_name }}</h4>
