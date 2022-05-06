@@ -17,14 +17,11 @@ return new class extends Migration
             $table->id()->unique();
             $table->string('username')->unique();
             $table->string('email')->unique();
-            $table->unsignedBigInteger('owner_id');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
             $table->boolean('is_admin')->default(false);
-
-            $table->foreign('owner_id')->references('id')->on('customers')->onDelete('cascade');
         });
     }
 

@@ -25,7 +25,7 @@ Route::resource('variety', \App\Http\Controllers\GoodVarietyController::class);
 Route::resource('payments', \App\Http\Controllers\PaymentsController::class);
 Route::resource('orders', \App\Http\Controllers\OrderController::class);
 Route::resource('users', \App\Http\Controllers\UsersController::class);
-
+Route::resource('customer', \App\Http\Controllers\CustomerController::class);
 
 //Route::get('/home', [App\Http\Controllers\ProductViewController::class, 'productInfo'])->name('home');
 //Route::get('/home', [App\Http\Controllers\ProductViewController::class, 'productInfo'])->name('home');

@@ -16,11 +16,14 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id()->unique();
             $table->timestamps();
-            $table->string('institution_name');
-            $table->string('institution_address');
-            $table->string('email');
-            $table->string('phone');
-            $table->string('is_member');
+            $table->unsignedBigInteger('user_id');
+            $table->string('institution_name')->nullable();
+            $table->string('institution_address')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->boolean('is_member')->default(false);
+
+            $table->index("user_id");
         });
     }
 
