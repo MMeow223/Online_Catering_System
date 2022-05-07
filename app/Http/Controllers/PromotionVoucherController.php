@@ -15,6 +15,8 @@ class PromotionVoucherController extends Controller
      */
     public function index()
     {
+        return view('voucher.index')
+            ->with('vouchers', PromotionVoucher::paginate(10));
         //
     }
 
@@ -26,6 +28,8 @@ class PromotionVoucherController extends Controller
     public function create()
     {
         //
+        return view('voucher.create',);
+
     }
 
     /**
@@ -48,6 +52,8 @@ class PromotionVoucherController extends Controller
     public function show(PromotionVoucher $promotionVoucher)
     {
         //
+        return view('voucher.show',);
+
     }
 
     /**
@@ -56,9 +62,14 @@ class PromotionVoucherController extends Controller
      * @param  \App\Models\PromotionVoucher  $promotionVoucher
      * @return \Illuminate\Http\Response
      */
-    public function edit(PromotionVoucher $promotionVoucher)
+    public function edit($voucher_code)
     {
         //
+        $voucher = PromotionVoucher::where('voucher_code',$voucher_code)->first();
+
+        return view('voucher.edit')
+            ->with('voucher', $voucher);
+
     }
 
     /**
