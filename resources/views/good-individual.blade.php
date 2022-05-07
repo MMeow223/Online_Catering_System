@@ -71,7 +71,7 @@
                     <div class="row">
                         <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-
                         </div>
-                        <input type="number" name="quantity" id="number" value="1"/>
+                        <input type="number" class="quantity-input" name="quantity" id="number" value="1"/>
                         <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+
                         </div>
                         <button class="btn btn-primary" id="AddtoCart" type="submit" >Add to Cart</button>
@@ -115,8 +115,8 @@
                 </div>
             @endforelse
             <span>
-                    {{$products->appends(['search' => request() -> query('search')])->links('pagination::bootstrap-5') }}
-                </span>
+                {{$products->appends(['search' => request() -> query('search')])->links('pagination::bootstrap-5') }}
+            </span>
         </div>
     </div>
 

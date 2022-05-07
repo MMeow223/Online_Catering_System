@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('good_id');
             $table->unsignedInteger('quantity');
             $table->unsignedBigInteger('variation_id')->nullable();
+            $table->boolean('selected')->default(false);
 
             // Foreign keys
             $table->foreign('user_id')->references('id')->on('users');
