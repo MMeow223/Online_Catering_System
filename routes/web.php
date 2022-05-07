@@ -26,6 +26,7 @@ Route::resource('payments', \App\Http\Controllers\PaymentsController::class);
 Route::resource('orders', \App\Http\Controllers\OrderController::class);
 Route::resource('users', \App\Http\Controllers\UsersController::class);
 Route::resource('cart', \App\Http\Controllers\ShoppingCartController::class);
+Route::resource('voucher', \App\Http\Controllers\PromotionVoucherController::class);
 
 Route::get('/cart/update/select/{item_id}',[\App\Http\Controllers\ShoppingCartController::class, 'updateSelected'])->name('cart.select');
 Route::get('/cart/update/quantity/increase/{item_id}',[\App\Http\Controllers\ShoppingCartController::class, 'updateIncreaseQuantity']);
