@@ -3,6 +3,7 @@
 @section('content')
     <div class="container">
 
+        <h1>Shopping Cart</h1>
 
         <table class="table">
             <thead  class=" rounded-2 border-0 ">
@@ -17,6 +18,7 @@
             </tr>
             </thead>
             <tbody>
+
                 @foreach($cart_items as $item)
                     <input type="hidden" id="item_id" name="item_id" value="{{$item->id}}">
                     <tr class="shadow-sm align-middle">
@@ -26,8 +28,10 @@
                             </form>
                         </td>
                         <td class="align-middle">
-                            <img src="{{url("/images/$item->good_image")}}" width="64" height="64">
-                            {{$item->good_name}}
+                            <a href="/view/goods/{{$item->goods_id}}" class="text-decoration-none text-black">
+                                <img src="{{url("/images/$item->good_image")}}" width="64" height="64">
+                                {{$item->good_name}}
+                            </a>
                         </td>
                         <td class="align-middle">{{$item->good_variety_name}}</td>
                         <td class="align-middle">RM{{number_format((float)($item->good_price), 2, '.', '')}}</td>
@@ -69,10 +73,10 @@
             <div class="d-flex justify-content-end">
                 <div class="row-col-2 justify-content-end">
                     <h3 class="m-2">Total Price</h3>
-                    <span class="mx-2 row">(selected 6 items)</span>
+                    <span class="mx-2 row">(selected {{$selectedItemCount}} items)</span>
                 </div>
                     <h1 id="cart-item-total-price" class="m-2 text-warning row">RM {{number_format((float)($total_price), 2, '.', '')}}</h1>
-                <button class="btn btn-outline-red px-5 d-inline m-2">Checkout</button>
+                <a class="btn btn-outline-red px-5 py-2 align-self-center d-inline m-2" href="/checkout">Checkout</a>
             </div>
 
         </div>

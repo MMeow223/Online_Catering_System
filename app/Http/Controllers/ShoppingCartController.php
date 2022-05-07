@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CheckoutGoods;
 use App\Models\Good;
 use App\Models\GoodVariety;
 use App\Models\ShoppingCart;
@@ -24,14 +25,23 @@ class ShoppingCartController extends Controller
         $cart_items = ShoppingCart::join('goods', 'shopping_carts.good_id', '=', 'goods.id')
             ->join('users', 'shopping_carts.user_id', '=', 'users.id')
             ->join('good_varieties', 'shopping_carts.variation_id', '=', 'good_varieties.id')
-            ->select('shopping_carts.*', 'goods.good_image','goods.good_name','goods.good_price', 'good_varieties.variety_name as good_variety_name', 'users.username as username')
+            ->select('shopping_carts.*', 'goods.id as goods_id', 'goods.good_image','goods.good_name','goods.good_price', 'good_varieties.variety_name as good_variety_name', 'users.username as username')
             ->get();
 
         $total_price = $this->calculateTotalPrice();
 
+        $selectedItemCount = 0;
+        foreach ($cart_items as $cart_item) {
+            if($cart_item->selected == 1){
+                $selectedItemCount += 1;
+            }
+        }
+//        dd($selectedItemCount);
+
         return view('cart.index')
             ->with('cart_items', $cart_items)
-            ->with('total_price', $total_price);
+            ->with('total_price', $total_price)
+            ->with('selectedItemCount', $selectedItemCount);
     }
 
     public function updateSelected($item_id)
@@ -98,6 +108,40 @@ class ShoppingCartController extends Controller
         return $total_price;
     }
 
+    //TODO when they click on the checkout button, the selected item will be added into checkout table
+    // then these item will display on the checkout page
+    // if the order is not placed, the item will not be deleted from the cart
+    // if the order is placed, the item will be deleted from the cart
+    public function checkoutCartItem(){
+
+        return view('cart.checkout');
+
+        $cart_items = ShoppingCart::join('goods', 'shopping_carts.good_id', '=', 'goods.id')
+            ->get();
+
+        // TODO should create an order here first
+
+
+
+//        foreach ($cart_items as $cart_item) {
+//            CheckoutGoods::insert($cart_items);
+//
+//            if ($cart_item->selected) {
+//                DB::table('checkout_goods')->insert([
+//                    'order_id' => $cart_items,
+//                    'good_id' => $request->input('description'),
+//                    'variety_id' => $image_file_path,
+//                    'quantity' => $request->input('price'),
+//                    'voucher_code' => $request->input('category_id'),
+//                    'created_at' => now(),
+//                    'updated_at' => now(),
+//                ]);
+//            }
+//        }
+
+
+
+    }
 
 //
 //    public function calculateCartTotalPrice(){

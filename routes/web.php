@@ -32,6 +32,8 @@ Route::get('/cart/update/quantity/increase/{item_id}',[\App\Http\Controllers\Sho
 Route::get('/cart/update/quantity/decrease/{item_id}',[\App\Http\Controllers\ShoppingCartController::class, 'updateDecreaseQuantity']);
 Route::get('/cart/update/cartItemPrice/{item_id}',[\App\Http\Controllers\ShoppingCartController::class, 'calculateCartItemPrice']);
 
+Route::get('/checkout',[\App\Http\Controllers\ShoppingCartController::class, 'checkoutCartItem']);
+
 
 Route::get('/filterCategory/{category_id}', [\App\Http\Controllers\Controller::class, 'filterGoodBasedOnCategory'])->name('filterCategory');
 

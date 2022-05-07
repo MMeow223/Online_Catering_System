@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->dateTime('delivery_time');
             $table->string('total_price');
-            $table->unsignedBigInteger('payment_id');
+            $table->unsignedBigInteger('payment_id')->nullable();
             $table->boolean('is_prepared')->default(false);
             $table->boolean('is_delivered')->default(false);
             $table->foreign('user_id')->references('id')->on('users');
