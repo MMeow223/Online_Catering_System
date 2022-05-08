@@ -34,8 +34,8 @@ class OrdersSeeder extends Seeder
             $faker = Factory::create();
 
             DB::table('orders')->insert([
-                'user_id' =>  $users_id[0],
-                'delivery_time' => $faker->dateTimeBetween('-1 years', '+1 years'),
+                'user_id' =>  $users_id[1],
+                'delivery_time' => $faker->dateTimeBetween('-3 days', '+3 days'),
                 'total_price' => $faker->randomFloat(2, 0, 100),
                 // randomly assign the payment_id from the payment table
                 'payment_id' => $i,
@@ -44,6 +44,8 @@ class OrdersSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
+
+
         }
 
     }
