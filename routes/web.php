@@ -32,6 +32,10 @@ Route::get('/cart/update/select/{item_id}',[\App\Http\Controllers\ShoppingCartCo
 Route::get('/cart/update/quantity/increase/{item_id}',[\App\Http\Controllers\ShoppingCartController::class, 'updateIncreaseQuantity']);
 Route::get('/cart/update/quantity/decrease/{item_id}',[\App\Http\Controllers\ShoppingCartController::class, 'updateDecreaseQuantity']);
 Route::get('/cart/update/cartItemPrice/{item_id}',[\App\Http\Controllers\ShoppingCartController::class, 'calculateCartItemPrice']);
+Route::get('/cart/update/voucher/{voucher_code}',[\App\Http\Controllers\ShoppingCartController::class, 'updateSelectedVoucher']);
+Route::get('/voucher/reset/{user_id}',[\App\Http\Controllers\ShoppingCartController::class, 'resetVoucher']);
+
+
 
 Route::get('/checkout',[\App\Http\Controllers\ShoppingCartController::class, 'checkoutCartItem']);
 
