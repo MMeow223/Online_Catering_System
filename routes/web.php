@@ -21,7 +21,7 @@ Route::resource('goods', \App\Http\Controllers\GoodsController::class);
 Route::get('/view/goods/{id}', [\App\Http\Controllers\GoodsController::class, 'view']);
 
 Route::resource('variety', \App\Http\Controllers\GoodVarietyController::class);
-
+Route::resource('notifications', \App\Http\Controllers\NotificationController::class);
 Route::resource('payments', \App\Http\Controllers\PaymentsController::class);
 Route::resource('orders', \App\Http\Controllers\OrderController::class);
 Route::resource('users', \App\Http\Controllers\UsersController::class);
@@ -30,6 +30,4 @@ Route::resource('users', \App\Http\Controllers\UsersController::class);
 //Route::get('/home', [App\Http\Controllers\ProductViewController::class, 'productInfo'])->name('home');
 //Route::get('/home', [App\Http\Controllers\ProductViewController::class, 'productInfo'])->name('home');
 Route::get('/filterCategory/{category_id}', [\App\Http\Controllers\Controller::class, 'filterGoodBasedOnCategory'])->name('filterCategory');
-
-
 
