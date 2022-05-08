@@ -3,9 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Pharmacies;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AccountSeeder extends Seeder
 {
@@ -16,6 +18,7 @@ class AccountSeeder extends Seeder
      */
     public function run()
     {
+
         DB::table('users')->insert([
             'username' => 'admin',
             'email' => 'admin@gmail.com',
@@ -23,9 +26,9 @@ class AccountSeeder extends Seeder
             'is_admin' => true,
             'created_at' => now(),
             'updated_at' => now(),
-        ]);
 
-        DB::table('users')->insert([
+        ]);
+        $user = User::create([
             'username' => 'user',
             'email' => 'user@gmail.com',
             'password' => bcrypt('user'),
@@ -33,5 +36,7 @@ class AccountSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        $user -> customer()->create(['user_id'=>$user->user_id]);
+
     }
 }

@@ -4,11 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Customer extends Model
 {
     use HasFactory;
-    public function user(){
+    protected $fillable = [
+        'username',
+        'email',
+        'password',
+    ];
+    public function user(): BelongsTo
+    {
         return $this -> belongsTo(User::Class);
     }
 }

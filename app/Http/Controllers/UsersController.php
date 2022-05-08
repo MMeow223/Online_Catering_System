@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -53,7 +54,7 @@ class UsersController extends Controller
         ]);
 
         // create new user
-        DB::table('users')->insert([
+        $user = User::create([
             'username' => $request->input('username'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
@@ -61,6 +62,7 @@ class UsersController extends Controller
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        $user -> customer()->create(['user_id'=>$user->user_id]);
 
 
         // redirect to index page

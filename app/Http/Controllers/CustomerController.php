@@ -73,7 +73,7 @@ class CustomerController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $customer = Auth::user()->customer()->first();
+        $user = Auth::user();
         // validate the data
         $this->validate($request, [
             'username' => 'required|max:255',
@@ -81,44 +81,108 @@ class CustomerController extends Controller
             'password' => 'required|max:255',
             'institutional_name' => 'max:255',
             'institutional_address' => 'max:255',
-            'phone' => 'regex:/^([0-9\s\-\+\(\)\.]*)$/',
+            'phone' => 'regex:^(\+?6?01)[0-46-9]-*[0-9]{7,8}$^',
         ]);
-
-        // update user
-        $query = DB::table('users')
-            ->where('id',$id)
-            ->update([
-                'username' => $request->input('username'),
-                'email' => $request->input('email'),
-                'password' => bcrypt($request->input('password')),
-                'updated_at' => now(),
-                // actually it will update this column automatically,
-                // but we want to make sure the query is executed,
-                // so add it wont give wrong error toast
-            ]);
-
-        $query2 = DB::table('customers')
-            ->where('id',$id)
+        //this is for user database
+        $notif = $user->password = bcrypt($request->input('password'));
+        $input = $request->only(
+            'username',
+            'email',
+            bcrypt('password'),
+        );
+        $user->update($input);
+        //for customers database
+        $query = DB::table('customers')
+            ->where('user_id',Auth::user()->id)
             ->update([
                 'institution_name' => $request->input('institutional_name'),
                 'institution_address' => $request->input('institutional_address'),
-                'phone' => bcrypt($request->input('phone')),
-                'updated_at' => now(),
+                'email'=> $request->input('email'),
+                'phone' => $request->input('phone'),
                 // actually it will update this column automatically,
                 // but we want to make sure the query is executed,
                 // so add it wont give wrong error toast
             ]);
 
-        // if update fail, then redirect to users.index page with error toast
+        // if update fail, then redirect to customer.index page with error toast
+        if(!$notif){
+            return redirect()->route('customer.index')->with('error','Record Added Failed. Please Try Again');
+        }
+
+        // redirect to customer.show page with success toast
+        return redirect()->route('customer.index')->with('success',$request->username . ' ');
+
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Customer  $customer
+     * @return \Illuminate\Http\Response
+     */
+    public function true(){
+        $customer = Auth::user()->customer()->first();
+        return view('customer.true',['customer'=>$customer]);
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Customer  $customer
+     * @return \Illuminate\Http\Response
+     */
+    public function false(){
+        $customer = Auth::user()->customer()->first();
+        return view('customer.false',['customer'=>$customer]);
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Customer  $customer
+     * @return \Illuminate\Http\Response
+     */
+    public function activateMember(Request $request){
+        $this->validate($request, [
+            'is_member' => 'boolean',
+        ]);
+
+        $query = DB::table('customers')
+            ->where('user_id',Auth::user()->id)
+            ->update([
+                'is_member' => 1,
+                // actually it will update this column automatically,
+                // but we want to make sure the query is executed,
+                // so add it wont give wrong error toast
+            ]);
         if(!$query){
             return redirect()->route('customer.index')->with('error','Record Added Failed. Please Try Again');
         }
-        // if update fail, then redirect to users.index page with error toast
-
-
-        // redirect to users.show page with success toast
-        return redirect()->route('customer.show', $customer)->with('success',$request->username . ' have been updated!');
-
+        return redirect()->route('customer.index')->with('success',Auth::user()->username . ', member have been activated!');
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Customer  $customer
+     * @return \Illuminate\Http\Response
+     */
+    public function deactivateMember(Request $request){
+        $this->validate($request, [
+            'is_member' => 'boolean',
+        ]);
+        $query= DB::table('customers')
+            ->where('user_id',Auth::user()->id)
+            ->update([
+                'is_member' => 0,
+                // actually it will update this column automatically,
+                // but we want to make sure the query is executed,
+                // so add it wont give wrong error toast
+            ]);
+        if(!$query){
+            return redirect()->route('customer.index')->with('error','Record Added Failed. Please Try Again');
+        }
+        return redirect()->route('customer.index')->with('too bad',Auth::user()->username . ', member have been deactivated');
     }
 
     /**
