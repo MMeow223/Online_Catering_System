@@ -91,7 +91,7 @@
                         <div class="col-md-6">
                             <input id="password" type="text" class="form-control" name="password" value="{{Auth()->user()->password}}" required autofocus disabled>
                             <div class="collapse" id="collapse-password">
-                                <p class="text-muted"><small>This value entered in this field will be displayed as the password. Please be careful of your surrounding to prevent data stolen.</small></p>
+                                <p class="text-muted"><small>This value entered in this field will be displayed as the password. Password is encrypted, so it will be safe.</small></p>
                             </div>
                         </div>
                     </div>
@@ -177,13 +177,12 @@
                     <div class="form-group row my-2">
                         <div class="col-md-6">
                             @if($customer->is_member)
-                                <a href="/customer/false/{{$customer->user_id}}">{{__('Deactivate Member?')}} </a>
+                                <a href="/customer/member/{{$customer->user_id}}">{{__('Deactivate Member?')}} </a>
                             @else
-                                <a href="/customer/true/{{$customer->user_id}}">{{__('Activate Member?')}} </a>
+                                <a href="/customer/member/{{$customer->user_id}}">{{__('Activate Member?')}} </a>
                             @endif
                         </div>
                     </div>
-
                     </div>
                 </div>
             </div>

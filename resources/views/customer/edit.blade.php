@@ -110,7 +110,7 @@
                                        value="{{Auth()->user()->password}}" required autofocus>
                                 <div class="collapse" id="collapse-password">
                                     <p class="text-muted"><small>This value entered in this field will be displayed as
-                                            the password.</small></p>
+                                            the password. Remove the encrypted password and insert new password, will be automatically encrypted too.</small></p>
                                 </div>
                             </div>
                         </div>

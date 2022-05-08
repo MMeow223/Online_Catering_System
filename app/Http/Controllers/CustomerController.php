@@ -142,24 +142,11 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function activateMember(Request $request){
-        $this->validate($request, [
-            'is_member' => 'boolean',
-        ]);
-
-        $query = DB::table('customers')
-            ->where('user_id',Auth::user()->id)
-            ->update([
-                'is_member' => 1,
-                // actually it will update this column automatically,
-                // but we want to make sure the query is executed,
-                // so add it wont give wrong error toast
-            ]);
-        if(!$query){
-            return redirect()->route('customer.index')->with('error','Record Added Failed. Please Try Again');
-        }
-        return redirect()->route('customer.index')->with('success',Auth::user()->username . ', member have been activated!');
+    public function member(){
+        $customer = Auth::user()->customer()->first();
+        return view('customer.member',['customer'=>$customer]);
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -167,14 +154,16 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function deactivateMember(Request $request){
+    public function changeStatus(Request $request){
+        $customer = Auth::user()->customer()->first();
         $this->validate($request, [
             'is_member' => 'boolean',
         ]);
+
         $query= DB::table('customers')
             ->where('user_id',Auth::user()->id)
             ->update([
-                'is_member' => 0,
+                'is_member' => $request->input('is_member'),
                 // actually it will update this column automatically,
                 // but we want to make sure the query is executed,
                 // so add it wont give wrong error toast
@@ -182,7 +171,14 @@ class CustomerController extends Controller
         if(!$query){
             return redirect()->route('customer.index')->with('error','Record Added Failed. Please Try Again');
         }
-        return redirect()->route('customer.index')->with('too bad',Auth::user()->username . ', member have been deactivated');
+
+        if($customer->is_member ==1){
+            return redirect()->route('customer.index')->with('success',Auth::user()->username . ', member have been deactivated');
+        }
+        else{
+            return redirect()->route('customer.index')->with('success',Auth::user()->username . ', member have been activated');
+        }
+
     }
 
     /**

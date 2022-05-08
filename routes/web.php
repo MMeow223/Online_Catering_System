@@ -30,6 +30,8 @@ Route::get('/customer/true/{id}', [\App\Http\Controllers\CustomerController::cla
 Route::post('/customer/true/{id}/activateMember', [\App\Http\Controllers\CustomerController::class, 'activateMember'])->name('activateMember');
 Route::get('/customer/false/{id}', [\App\Http\Controllers\CustomerController::class, 'false']);
 Route::post('/customer/false/{id}/deactivateMember', [\App\Http\Controllers\CustomerController::class, 'deactivateMember'])->name('deactivateMember');
+Route::get('/customer/member/{id}', [\App\Http\Controllers\CustomerController::class, 'member']);
+Route::post('/customer/member/{id}/changeStatus', [\App\Http\Controllers\CustomerController::class, 'changeStatus'])->name('changeStatus');
 
 
 //Route::post('changeStatus', [App\Http\Controllers\CustomerController::class, 'changeStatus'])->name('changeStatus');
