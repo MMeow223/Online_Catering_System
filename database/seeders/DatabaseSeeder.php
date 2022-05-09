@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             GoodsVarietySeeder::class,
             OrdersSeeder::class,
             PaymentSeeder::class,
+            CheckoutGoodSeeder::class,
         ]);
     }
 }
