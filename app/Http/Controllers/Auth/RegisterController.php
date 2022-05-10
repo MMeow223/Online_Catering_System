@@ -65,15 +65,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $owner_id = DB::table('customers')->pluck('id');
-        return User::create([
+        $user = User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'owner_id' => $owner_id[0],
             'is_admin' => false,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        $user -> customer()->create(['user_id'=>$user->user_id]);
+        return $user;
     }
 }

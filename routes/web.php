@@ -27,6 +27,13 @@ Route::resource('orders', \App\Http\Controllers\OrderController::class);
 Route::resource('users', \App\Http\Controllers\UsersController::class);
 Route::resource('cart', \App\Http\Controllers\ShoppingCartController::class);
 Route::resource('voucher', \App\Http\Controllers\PromotionVoucherController::class);
+Route::resource('customer', \App\Http\Controllers\CustomerController::class);
+Route::get('/customer/true/{id}', [\App\Http\Controllers\CustomerController::class, 'true']);
+Route::post('/customer/true/{id}/activateMember', [\App\Http\Controllers\CustomerController::class, 'activateMember'])->name('activateMember');
+Route::get('/customer/false/{id}', [\App\Http\Controllers\CustomerController::class, 'false']);
+Route::post('/customer/false/{id}/deactivateMember', [\App\Http\Controllers\CustomerController::class, 'deactivateMember'])->name('deactivateMember');
+Route::get('/customer/member/{id}', [\App\Http\Controllers\CustomerController::class, 'member']);
+Route::post('/customer/member/{id}/changeStatus', [\App\Http\Controllers\CustomerController::class, 'changeStatus'])->name('changeStatus');
 
 Route::get('/cart/update/select/{item_id}',[\App\Http\Controllers\ShoppingCartController::class, 'updateSelected'])->name('cart.select');
 Route::get('/cart/update/quantity/increase/{item_id}',[\App\Http\Controllers\ShoppingCartController::class, 'updateIncreaseQuantity']);

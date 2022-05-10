@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -52,17 +53,16 @@ class UsersController extends Controller
             'password' => 'required|max:255',
         ]);
 
-        $owner_id = DB::table('customers')->pluck('id');
         // create new user
-        DB::table('users')->insert([
+        $user = User::create([
             'username' => $request->input('username'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
-            'owner_id' => $owner_id[0],
             'is_admin' => false,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        $user -> customer()->create(['user_id'=>$user->user_id]);
 
 
         // redirect to index page
@@ -113,6 +113,7 @@ class UsersController extends Controller
         $this->validate($request, [
             'username' => 'required',
             'email' => 'required',
+            'password' => 'required',
         ]);
 
         // update user
@@ -121,6 +122,7 @@ class UsersController extends Controller
             ->update([
                 'username' => $request->input('username'),
                 'email' => $request->input('email'),
+                'password' => bcrypt($request->input('password')),
                 'updated_at' => now(),
                 // actually it will update this column automatically,
                 // but we want to make sure the query is executed,
