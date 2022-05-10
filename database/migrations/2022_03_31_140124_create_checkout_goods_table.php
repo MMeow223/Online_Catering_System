@@ -21,12 +21,12 @@ return new class extends Migration
             $table->unsignedBigInteger('good_id');
             $table->unsignedBigInteger('variety_id');
             $table->unsignedInteger('quantity');
-            $table->string('voucher_code');
+//            $table->string('voucher_code');
 
             $table->foreign('order_id')->references('id')->on('orders');
             $table->foreign('good_id')->references('id')->on('goods');
             $table->foreign('variety_id')->references('id')->on('good_varieties');
-            $table->foreign('voucher_code')->references('voucher_code')->on('promotion_vouchers');
+//            $table->foreign('voucher_code')->references('voucher_code')->on('promotion_vouchers');
         });
     }
 
