@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\GoodCategory;
 use App\Models\GoodVariety;
 use App\Models\Order;
+use App\Models\ShoppingCart;
 use Illuminate\Http\Request;
 use App\Models\Good;
 use Illuminate\Support\Facades\DB;
@@ -50,32 +51,67 @@ class OrderController extends Controller
     {
         // validate the data
         $this->validate($request, [
-            'user_id' => 'required|max:255',
-            'delivery_time' => 'required|datetime',
-            'total_price' => 'required|max:255',
-            'payment_id' => 'required|integer',
-            'is_prepared' => 'required|boolean',
-            'is_delivered' => 'required|boolean',
-
+            'delivery_date' => 'required',
+            'delivery_time' => 'required',
+            'payment_method' => 'required|string|max:255',
         ]);
 
+        //combine delivery date and time
+        $delivery_time = $request->input('delivery_date') . ' ' . $request->input('delivery_time') . ':00';
+
+        $cart_items = ShoppingCart::join('goods', 'shopping_carts.good_id', '=', 'goods.id')
+            ->join('users', 'shopping_carts.user_id', '=', 'users.id')
+            ->join('good_varieties', 'shopping_carts.variation_id', '=', 'good_varieties.id')
+            ->select('shopping_carts.*', 'goods.good_image','goods.good_name','goods.good_price', 'good_varieties.variety_name as good_variety_name', 'users.username as username')
+            ->where('shopping_carts.user_id', auth()->user()->id)
+            ->where('shopping_carts.selected', 1)
+            ->get();
+
+        $total_price = 0;
+        foreach ($cart_items as $cart_item) {
+            $total_price += $cart_item->good_price * $cart_item->quantity;
+        }
+
+        $customer = DB::table('users')->join('customers', 'users.owner_id', '=', 'customers.id')
+            ->where('users.id', '=', auth()->user()->id)
+            ->first()
+        ;
+
+        ;
         // create new good
-        DB::table('payments')->insert([
-            'good_name' => $request->input('name'),
-            'good_description' => $request->input('description'),
-            'good_image' => $image_file_path,
-            'good_price' => $request->input('price'),
-            'good_category_id' => $request->input('category_id'),
-            'is_warm' => $request->input('food_type_option'),
+        DB::table('orders')->insert([
+            'user_id' => auth()->user()->id,
+            'delivery_address' => $customer->institution_address,
+            'delivery_time' => $delivery_time,
+            'total_price' => $total_price,
+            'payment_id' => null,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
-        // create the variety of the good
-        GoodVarietyController::staticStoreGoodVariety($request);
+        $order_id = DB::getPdo()->lastInsertId();
+
+        //TODO add cart item into checkout items
+        foreach ($cart_items as $cart_item) {
+            DB::table('checkout_goods')->insert([
+                'order_id' => $order_id,
+                'good_id' => $cart_item->good_id,
+                'variety_id' => $cart_item->variation_id,
+                'quantity' => $cart_item->quantity,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+
+        //TODO remove cart item from cart
+        ShoppingCart::where('user_id', auth()->user()->id)
+            ->where('selected', 1)
+            ->delete();
+
 
         // redirect to index page
-        return redirect()->route('orders.index');
+        return redirect()->back()->with('success', 'Order created successfully');
 
     }
 
