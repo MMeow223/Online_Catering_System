@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\GoodCategory;
 use App\Models\GoodVariety;
 use App\Models\Order;
@@ -72,10 +73,10 @@ class OrderController extends Controller
             $total_price += $cart_item->good_price * $cart_item->quantity;
         }
 
-        $customer = DB::table('users')->join('customers', 'users.owner_id', '=', 'customers.id')
-            ->where('users.id', '=', auth()->user()->id)
-            ->first()
-        ;
+
+
+        $customer = Customer::where('user_id',auth()->user()->id)
+            ->first();
 
         ;
         // create new good
@@ -111,7 +112,7 @@ class OrderController extends Controller
 
 
         // redirect to index page
-        return redirect()->back()->with('success', 'Order created successfully');
+        return redirect('/cart')->with('success', 'Order created successfully');
 
     }
 

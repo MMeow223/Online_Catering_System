@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+    <a href="/cart" class="m-3 ms-5 text-decoration-none py-1 px-2 d-inline-block btn btn-outline-secondary"><h4 class="fw-bold">   < Go back</h4></a>
 
     <div class="container">
         <h1>
-            Shopping Cart
+            Check Out
         </h1>
         <div class="rounded shadow row border border-2">
             <div class=" m-2 ms-4 fw-bold text-decoration-underline d-flex" style="color: #f35858">

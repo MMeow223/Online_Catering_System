@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CheckoutGoods;
+use App\Models\Customer;
 use App\Models\Good;
 use App\Models\GoodVariety;
 use App\Models\PromotionVoucher;
@@ -199,12 +200,7 @@ class ShoppingCartController extends Controller
 
     public function checkoutCartItem(){
 
-        $customer_information = User::join('customers','users.owner_id','=','customers.id')
-            ->select('customers.*','users.username')
-            ->where('users.id',auth()->user()->id)
-            ->first();
-
-
+        $customer_information = Customer::where('user_id', auth()->user()->id)->first();
 
         $selected_cart_items = ShoppingCart::join('goods', 'shopping_carts.good_id', '=', 'goods.id')
             ->join('users', 'shopping_carts.user_id', '=', 'users.id')
@@ -213,6 +209,10 @@ class ShoppingCartController extends Controller
             ->where('shopping_carts.user_id', auth()->user()->id)
             ->where('shopping_carts.selected', 1)
             ->get();
+
+        if($selected_cart_items->count() == 0) {
+            return redirect()->back()->with('error', 'Please select at least one item to checkout');
+        }
 
         $vouchers = UserVoucher::join('promotion_vouchers', 'user_vouchers.voucher_code', '=', 'promotion_vouchers.voucher_code')
             ->where('user_id', Auth::id())
@@ -267,33 +267,8 @@ class ShoppingCartController extends Controller
             ;
 
 
-        // TODO should create an order here first
-
     }
 
-    public function placeOrder(Request $request){
-
-        dd($request->all());
-
-
-
-    }
-//
-//    public function calculateCartTotalPrice(){
-//        //
-//        $cart_items = ShoppingCart::join('goods', 'shopping_carts.good_id', '=', 'goods.id')
-//            ->join('users', 'shopping_carts.user_id', '=', 'users.id')
-//            ->join('good_varieties', 'shopping_carts.variation_id', '=', 'good_varieties.id')
-//            ->select('shopping_carts.*', 'goods.good_image','goods.good_name','goods.good_price', 'good_varieties.variety_name as good_variety_name', 'users.username as username')
-//            ->get();
-//
-//        $total_price = 0;
-//        foreach ($cart_items as $cart_item) {
-//            $total_price += $cart_item->good_price * $cart_item->quantity;
-//        }
-//
-//        return $total_price;
-//    }
 
     /**
      * Show the form for creating a new resource.

@@ -164,7 +164,7 @@
                                 </svg>
                                 Cart
                             </a>
-                            
+
                             <a href="/customer" class="text-black  me-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -230,8 +230,8 @@
 
     <main class="py-4">
         @if(auth()->guest() OR !(auth()->user()->is_admin))
-            @include('inc.message')
-            @yield('content')
+                @include('inc.message')
+                @yield('content')
         @elseif(auth()->user()->is_admin)
 
             <div class="row m-auto p-auto">
@@ -329,7 +329,7 @@
                         </div>
                         @endif
                     </div>
-                    <div class="col-8">
+                    <div class="fixed-top">
                         @include('inc.message')
                         @yield('content')
                     </div>

@@ -198,11 +198,8 @@ class CustomerController extends Controller
             'delivery_address' => 'required|max:255',
         ]);
 
-        // update user
-        DB::table('users')->join('customers', 'users.owner_id', '=', 'customers.id')
-            ->where('users.id', '=', auth()->user()->id)
-            ->update(
-                ['customers.institution_address' => $request->input('delivery_address')]);
+        Customer::where('user_id',auth()->user()->id)
+            ->update(['institution_address'=>$request->input('delivery_address')]);
 
 
         return redirect()->back()->with('success','Address updated!');
