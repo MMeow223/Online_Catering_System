@@ -230,8 +230,8 @@
 
     <main class="py-4">
         @if(auth()->guest() OR !(auth()->user()->is_admin))
-                @include('inc.message')
-                @yield('content')
+            @include('inc.message')
+            @yield('content')
         @elseif(auth()->user()->is_admin)
 
             <div class="row m-auto p-auto">
@@ -329,7 +329,7 @@
                         </div>
                         @endif
                     </div>
-                    <div class="fixed-top">
+                    <div class="col-8">
                         @include('inc.message')
                         @yield('content')
                     </div>
