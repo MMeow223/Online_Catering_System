@@ -148,13 +148,13 @@ class ShoppingCartController extends Controller
             ->join('users', 'shopping_carts.user_id', '=', 'users.id')
             ->join('good_varieties', 'shopping_carts.variation_id', '=', 'good_varieties.id')
             ->select('shopping_carts.*', 'goods.good_image','goods.good_name','goods.good_price', 'good_varieties.variety_name as good_variety_name', 'users.username as username')
+            ->where('shopping_carts.user_id', auth()->user()->id)
+            ->where('shopping_carts.selected', 1)
             ->get();
 
         $total_price = 0;
         foreach ($cart_items as $cart_item) {
-            if ($cart_item->selected) {
-                $total_price += $cart_item->good_price * $cart_item->quantity;
-            }
+            $total_price += $cart_item->good_price * $cart_item->quantity;
         }
 
         return $total_price;
@@ -174,13 +174,13 @@ class ShoppingCartController extends Controller
             ->join('users', 'shopping_carts.user_id', '=', 'users.id')
             ->join('good_varieties', 'shopping_carts.variation_id', '=', 'good_varieties.id')
             ->select('shopping_carts.*', 'goods.good_image','goods.good_name','goods.good_price', 'good_varieties.variety_name as good_variety_name', 'users.username as username')
+            ->where('shopping_carts.user_id', auth()->user()->id)
+            ->where('shopping_carts.selected', 1)
             ->get();
 
         $total_price = 0;
         foreach ($cart_items as $cart_item) {
-            if ($cart_item->selected) {
-                $total_price += $cart_item->good_price * $cart_item->quantity;
-            }
+            $total_price += $cart_item->good_price * $cart_item->quantity;
         }
 
         if($current_using_voucher != null) {
@@ -197,41 +197,87 @@ class ShoppingCartController extends Controller
         return $total_price;
     }
 
-    //TODO when they click on the checkout button, the selected item will be added into checkout table
-    // then these item will display on the checkout page
-    // if the order is not placed, the item will not be deleted from the cart
-    // if the order is placed, the item will be deleted from the cart
     public function checkoutCartItem(){
 
-        return view('cart.checkout');
+        $customer_information = User::join('customers','users.owner_id','=','customers.id')
+            ->select('customers.*','users.username')
+            ->where('users.id',auth()->user()->id)
+            ->first();
 
-        $cart_items = ShoppingCart::join('goods', 'shopping_carts.good_id', '=', 'goods.id')
+
+
+        $selected_cart_items = ShoppingCart::join('goods', 'shopping_carts.good_id', '=', 'goods.id')
+            ->join('users', 'shopping_carts.user_id', '=', 'users.id')
+            ->join('good_varieties', 'shopping_carts.variation_id', '=', 'good_varieties.id')
+            ->select('shopping_carts.*', 'goods.good_image','goods.good_name','goods.good_price', 'good_varieties.variety_name as good_variety_name', 'users.username as username')
+            ->where('shopping_carts.user_id', auth()->user()->id)
+            ->where('shopping_carts.selected', 1)
             ->get();
+
+        $vouchers = UserVoucher::join('promotion_vouchers', 'user_vouchers.voucher_code', '=', 'promotion_vouchers.voucher_code')
+            ->where('user_id', Auth::id())
+            ->select('user_vouchers.*', 'promotion_vouchers.voucher_name as voucher_name', 'promotion_vouchers.discount as discount','promotion_vouchers.price_limit as price_limit')
+            ->get();
+
+        $current_using_voucher = UserVoucher::join('promotion_vouchers', 'user_vouchers.voucher_code', '=', 'promotion_vouchers.voucher_code')
+            ->where('user_id', Auth::id())
+            ->where('use_status', 'using')
+            ->select('user_vouchers.*', 'promotion_vouchers.voucher_name as voucher_name', 'promotion_vouchers.discount as discount','promotion_vouchers.price_limit as price_limit')
+            ->first();
+
+        $total_price = $this->calculateTotalPrice();
+        $total_price_after_discount = $this->calculateTotalPriceWithDiscount($current_using_voucher);
+
+        $selectedItemCount = 0;
+        foreach ($selected_cart_items as $cart_item) {
+            if($cart_item->selected == 1){
+                $selectedItemCount += 1;
+            }
+        }
+
+
+        if($current_using_voucher == null){
+            $discount = 0;
+            $actual_discount_amount = $total_price;
+
+        }
+        else{
+
+            $actual_discount_amount = $current_using_voucher->discount * $total_price / 100;
+
+            if($actual_discount_amount >= $current_using_voucher->price_limit){
+                $actual_discount_amount = $current_using_voucher->price_limit;
+            }
+            $discount = $current_using_voucher->discount;
+
+        }
+
+
+        return view('cart.checkout')
+            ->with('selected_cart_items', $selected_cart_items)
+            ->with('total_price', $total_price)
+            ->with('total_price_after_discount', $total_price_after_discount)
+            ->with('selectedItemCount', $selectedItemCount)
+            ->with('vouchers',$vouchers)
+            ->with('current_using_voucher',$current_using_voucher)
+            ->with('products',Good::paginate(40))
+            ->with('actual_discount_amount',$actual_discount_amount)
+            ->with('customer_information',$customer_information)
+            ->with('discount',$discount);
+            ;
+
 
         // TODO should create an order here first
 
+    }
 
+    public function placeOrder(Request $request){
 
-//        foreach ($cart_items as $cart_item) {
-//            CheckoutGoods::insert($cart_items);
-//
-//            if ($cart_item->selected) {
-//                DB::table('checkout_goods')->insert([
-//                    'order_id' => $cart_items,
-//                    'good_id' => $request->input('description'),
-//                    'variety_id' => $image_file_path,
-//                    'quantity' => $request->input('price'),
-//                    'voucher_code' => $request->input('category_id'),
-//                    'created_at' => now(),
-//                    'updated_at' => now(),
-//                ]);
-//            }
-//        }
+        dd($request->all());
 
 
 
     }
-
 //
 //    public function calculateCartTotalPrice(){
 //        //

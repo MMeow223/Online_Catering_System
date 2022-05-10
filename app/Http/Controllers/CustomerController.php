@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
@@ -81,5 +82,21 @@ class CustomerController extends Controller
     public function destroy(Customer $customer)
     {
         //
+    }
+
+    public function updateAddress(Request $request){
+        // validate the data
+        $this->validate($request, [
+            'delivery_address' => 'required|max:255',
+        ]);
+
+        // update user
+        DB::table('users')->join('customers', 'users.owner_id', '=', 'customers.id')
+            ->where('users.id', '=', auth()->user()->id)
+            ->update(
+                ['customers.institution_address' => $request->input('delivery_address')]);
+
+
+        return redirect()->back()->with('success','Address updated!');
     }
 }
