@@ -35,10 +35,9 @@ Route::get('/cart/update/cartItemPrice/{item_id}',[\App\Http\Controllers\Shoppin
 Route::get('/cart/update/voucher/{voucher_code}',[\App\Http\Controllers\ShoppingCartController::class, 'updateSelectedVoucher']);
 Route::get('/voucher/reset/{user_id}',[\App\Http\Controllers\ShoppingCartController::class, 'resetVoucher']);
 
-
-
 Route::get('/checkout',[\App\Http\Controllers\ShoppingCartController::class, 'checkoutCartItem']);
-
+Route::get('/placeOrder',[\App\Http\Controllers\OrderController::class, 'store']);
+Route::get('/update/address',[\App\Http\Controllers\CustomerController::class, 'updateAddress']);
 
 Route::get('/filterCategory/{category_id}', [\App\Http\Controllers\Controller::class, 'filterGoodBasedOnCategory'])->name('filterCategory');
 
