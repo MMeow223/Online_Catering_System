@@ -20,7 +20,7 @@ class OrderStatusController extends Controller
             ->select('checkout_goods.*','orders.*','goods.*','good_varieties.*')
             ->get();
 
-        return view('order-status')
+        return view('orderstatus.index')
             ->with('checkout', $checkout)
             ->with('orders', Order::orderBy('orders.delivery_time','ASC')->where('orders.delivery_time' , '>=' , $now)->paginate(5));
 
