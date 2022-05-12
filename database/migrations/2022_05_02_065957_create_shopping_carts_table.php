@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedInteger('quantity');
             $table->unsignedBigInteger('variation_id')->nullable();
             $table->boolean('selected')->default(false);
+            $table->string('voucher_code')->nullable();
 
             // Foreign keys
             $table->foreign('user_id')->references('id')->on('users');

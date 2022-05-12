@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('variety_id');
             $table->unsignedInteger('quantity');
 
+
             $table->foreign('order_id')->references('id')->on('orders');
             $table->foreign('good_id')->references('id')->on('goods');
             $table->foreign('variety_id')->references('id')->on('good_varieties');
