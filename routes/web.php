@@ -16,6 +16,7 @@ Auth::routes();
 
 Route::get('/', [\App\Http\Controllers\Controller::class,'index'])->name('dashboard');
 Route::get('/order-status', [\App\Http\Controllers\OrderStatusController::class,'index']);
+Route::get('/order-status/{id}', [\App\Http\Controllers\OrderStatusController::class,'show'])->name('orderView');
 // route resource for goods
 Route::resource('goods', \App\Http\Controllers\GoodsController::class);
 
