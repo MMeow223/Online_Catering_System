@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [\App\Http\Controllers\Controller::class,'index'])->name('dashboard');
+Route::get('/order-status', [\App\Http\Controllers\OrderStatusController::class,'index']);
 // route resource for goods
 Route::resource('goods', \App\Http\Controllers\GoodsController::class);
 
