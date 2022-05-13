@@ -36,7 +36,6 @@ class AccountSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        $user -> customer()->create(['user_id'=>$user->user_id]);
 
     }
 }

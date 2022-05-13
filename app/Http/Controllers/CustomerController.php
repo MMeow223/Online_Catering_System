@@ -187,4 +187,17 @@ class CustomerController extends Controller
     {
         //
     }
+
+    public function updateAddress(Request $request){
+        // validate the data
+        $this->validate($request, [
+            'delivery_address' => 'required|max:255',
+        ]);
+
+        Customer::where('user_id',auth()->user()->id)
+            ->update(['institution_address'=>$request->input('delivery_address')]);
+
+
+        return redirect()->back()->with('success','Address updated!');
+    }
 }

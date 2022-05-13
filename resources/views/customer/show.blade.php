@@ -76,7 +76,6 @@
                         </div>
                     </div>
 
-
                     <div class="form-group row my-2">
                         <div class="col-md-4 col-form-label text-md-right d-flex justify-content-between">
                             <label for="institution_name">{{ __('Institution Name') }}</label>
