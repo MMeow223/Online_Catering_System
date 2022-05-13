@@ -100,19 +100,11 @@ class CustomerController extends Controller
         ]);
         //this is for user database
         $notif = $user->password = bcrypt($request->input('password'));
-        if('password' == ''){
-            $input = $request->only(
-                'username',
-                'email',
-            );
-        }
-        else{
-            $input = $request->only(
-                'username',
-                'email',
-                bcrypt('password')
-            );
-        }
+        $input = $request->only(
+            'username',
+            'email',
+            bcrypt('password')
+        );
         $user->update($input);
         //for customers database
         $query = DB::table('customers')
