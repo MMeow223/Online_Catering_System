@@ -52,4 +52,14 @@ Route::get('/update/address',[\App\Http\Controllers\CustomerController::class, '
 Route::get('/filterCategory/{category_id}', [\App\Http\Controllers\Controller::class, 'filterGoodBasedOnCategory'])->name('filterCategory');
 
 
+Route::get('/about', function () {
+    return view('about');
+});
+Route::get('/help', function () {
+    return view('help');
+});
+Route::get('/disclaimer', function () {
+    return view('disclaimer');
+});
+
 

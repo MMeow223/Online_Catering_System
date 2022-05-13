@@ -72,24 +72,7 @@
                             <td class="align-middle" id="cart-item-total-price-{{$item->id}}">RM{{ number_format((float)($item->good_price * $item->quantity), 2, '.', '')}}</td>
                         </tr>
                     @endif
-                @endforeach
 
-                <tr class="shadow-sm align-middle">
-                    <td class="align-middle">
-                        <img src="{{url("/images/$item->good_image")}}" width="64" height="64">
-                        {{$item->good_name}}
-                    </td>
-                    <td class="align-middle">{{$item->variety_name}}</td>
-                    <td class="align-middle">RM{{ number_format((float)($item->good_price), 2, '.', '')}}</td>
-                    <td class="align-middle">
-                        <div class="row">
-                            {{$item->quantity}}
-                        </div>
-                    </td>
-                    <td class="align-middle" id="cart-item-total-price">
-                        RM{{ number_format((float)($item->good_price * $item->quantity), 2, '.', '')}}
-                    </td>
-                </tr>
             @endforeach
             </tbody>
         </table>

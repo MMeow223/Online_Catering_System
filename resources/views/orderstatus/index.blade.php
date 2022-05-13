@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+        <h1>Orders Placed</h1>
         <div class="justify-content-center">
             @foreach ($orders as $order)
                 <a class="text-decoration-none text-black" href="{{ route('orderView', $order->id) }}" >
