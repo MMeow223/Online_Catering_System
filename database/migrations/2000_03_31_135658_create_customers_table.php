@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->boolean('is_member')->default(false);
+            $table->date('activate_date')->default('1999-09-09');
+            $table->date('expiry_date')->default('2100-09-09');
+            $table->boolean('is_subscribed')->default(false);
 
             $table->index("user_id");
         });
