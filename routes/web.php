@@ -15,20 +15,18 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [\App\Http\Controllers\Controller::class,'index'])->name('dashboard');
-Route::get('/order-status', [\App\Http\Controllers\OrderStatusController::class,'index']);
-// route resource for goods
 Route::resource('goods', \App\Http\Controllers\GoodsController::class);
-
 Route::get('/view/goods/{id}', [\App\Http\Controllers\GoodsController::class, 'view']);
 
 Route::resource('variety', \App\Http\Controllers\GoodVarietyController::class);
-
 Route::resource('payments', \App\Http\Controllers\PaymentsController::class);
 Route::resource('orders', \App\Http\Controllers\OrderController::class);
 Route::resource('users', \App\Http\Controllers\UsersController::class);
 Route::resource('cart', \App\Http\Controllers\ShoppingCartController::class);
 Route::resource('voucher', \App\Http\Controllers\PromotionVoucherController::class);
 Route::resource('customer', \App\Http\Controllers\CustomerController::class);
+Route::resource('order-status', \App\Http\Controllers\OrderStatusController::class);
+
 Route::get('/customer/true/{id}', [\App\Http\Controllers\CustomerController::class, 'true']);
 Route::post('/customer/true/{id}/activateMember', [\App\Http\Controllers\CustomerController::class, 'activateMember'])->name('activateMember');
 Route::get('/customer/false/{id}', [\App\Http\Controllers\CustomerController::class, 'false']);
