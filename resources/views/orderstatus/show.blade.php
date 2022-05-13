@@ -2,22 +2,26 @@
 
 @section('content')
     <div class="container">
-        @if(time() >= strtotime($orders->delivery_time))
-            <img class="rounded mx-auto d-block" src="{{URL("/images/111.png")}}" alt="status11" height="auto" width="auto">
-        @else
-            @if($orders->is_prepared == 1)
-                @if($orders->is_delivered == 1)
-                    <img class="rounded mx-auto d-block" src="{{URL("/images/11.png")}}" alt="status11" height="auto" width="auto">
-                @else
-                    <img class="rounded mx-auto d-block col" src="{{URL("/images/10.png")}}" alt="status01" height="auto" width="auto">
-                @endif
-            @else
-                <img class="rounded mx-auto d-block p-2 col" src="{{URL("/images/00.png")}}" alt="status00" height="auto" width="auto">
-            @endif
-        @endif
+
         <h1>
             Order Details
         </h1>
+        <div class="m-5">
+
+            @if(time() >= strtotime($orders->delivery_time))
+                <img class="rounded mx-auto d-block" src="{{URL("/images/111.png")}}" alt="status11" height="auto" width="auto">
+            @else
+                @if($orders->is_prepared == 1)
+                    @if($orders->is_delivered == 1)
+                        <img class="rounded mx-auto d-block" src="{{URL("/images/11.png")}}" alt="status11" height="auto" width="auto">
+                    @else
+                        <img class="rounded mx-auto d-block col" src="{{URL("/images/10.png")}}" alt="status01" height="auto" width="auto">
+                    @endif
+                @else
+                    <img class="rounded mx-auto d-block p-2 col" src="{{URL("/images/00.png")}}" alt="status00" height="auto" width="auto">
+                @endif
+            @endif
+        </div>
         <div class="rounded shadow row border border-2">
             <div class=" m-2 ms-4 fw-bold text-decoration-underline d-flex" style="color: #f35858">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#f35858" class="bi bi-pin mx-1" viewBox="0 0 16 16">
@@ -95,7 +99,7 @@
             </div>
             <div class="d-flex justify-content-end border-bottom border-2">
                 <h3 class="m-2">Total Price</h3>
-                <h1 id="cart-item-total-price" class="m-2 text-warning row">{{ $orders->total_price }}</h1>
+                <h1 id="cart-item-total-price" class="m-2 text-warning row">RM {{ $orders->total_price }}</h1>
             </div>
 
         </div>
