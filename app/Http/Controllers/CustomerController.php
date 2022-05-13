@@ -93,21 +93,20 @@ class CustomerController extends Controller
         $this->validate($request, [
             'username' => 'required|max:255',
             'email' => 'required|max:255',
-            'password' => 'required|max:255',
             'institutional_name' => 'max:255',
             'institutional_address' => 'max:255',
             'phone' => 'max:255',
         ]);
         //this is for user database
-        $notif = $user->password = bcrypt($request->input('password'));
+
         $input = $request->only(
             'username',
             'email',
-            bcrypt('password')
         );
+
         $user->update($input);
         //for customers database
-        $query = DB::table('customers')
+         DB::table('customers')
             ->where('user_id',Auth::user()->id)
             ->update([
                 'institution_name' => $request->input('institutional_name'),
@@ -116,16 +115,12 @@ class CustomerController extends Controller
                 'phone' => $request->input('phone'),
                 // actually it will update this column automatically,
                 // but we want to make sure the query is executed,
-                // so add it wont give wrong error toast
-            ]);
+                // so add it won't give wrong error toast
+        ]);
 
-        // if update fail, then redirect to customer.index page with error toast
-        if(!$notif){
-            return redirect()->route('customer.index')->with('error','Record Added Failed. Please Try Again');
-        }
 
         // redirect to customer.show page with success toast
-        return redirect()->route('customer.index')->with('success',$request->username . ' ');
+        return redirect()->route('customer.index')->with('success',$request->username . ' updated');
 
     }
     /**
