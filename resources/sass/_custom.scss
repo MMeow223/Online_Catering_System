@@ -51,6 +51,33 @@
     background-color: transparent;
 }
 
+
+.btn-outline-red {
+    color: #f35858;
+    border-color: #f35858;
+}
+.btn-outline-red:hover {
+    color: #fff;
+    background-color: #f35858;
+    border-color: #f35858;
+}
+.btn-check:focus + .btn-outline-red, .btn-outline-red:focus {
+    box-shadow: 0 0 0 0.25rem rgba(246, 46, 46, 0.5);
+}
+.btn-check:checked + .btn-outline-red, .btn-check:active + .btn-outline-red, .btn-outline-red:active, .btn-outline-red.active, .btn-outline-red.dropdown-toggle.show {
+    color: #fff;
+    background-color: #f35858;
+    border-color: #f35858;
+}
+.btn-check:checked + .btn-outline-red:focus, .btn-check:active + .btn-outline-red:focus, .btn-outline-red:active:focus, .btn-outline-red.active:focus, .btn-outline-red.dropdown-toggle.show:focus {
+    box-shadow: 0 0 0 0.25rem rgba(246, 46, 46, 0.5);
+
+}
+.btn-outline-red:disabled, .btn-outline-red-warm.disabled {
+    color: #f35858;
+    background-color: transparent;
+}
+
 :root {
     --offcanvas-width: 276px;
     --topNavbarHeight: 55px;
@@ -88,9 +115,8 @@
 .value-button {
     display: inline-block;
     border: 1px solid #ddd;
-    margin: 0px;
+    border-radius: 5px;
     width: 40px;
-    height: 35px;
     text-align: center;
     vertical-align: middle;
     padding: 5px 0;
@@ -122,7 +148,7 @@ form #input-wrap {
     padding: 0px;
 }
 
-input#number {
+input.quantity-input {
     text-align: center;
     border: none;
     border-top: 1px solid #ddd;

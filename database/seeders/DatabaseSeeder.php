@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PromotionVoucher;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -20,8 +21,10 @@ class DatabaseSeeder extends Seeder
             GoodsCategoriesSeeder::class,
             GoodsSeeder::class,
             GoodsVarietySeeder::class,
-            OrdersSeeder::class,
             PaymentSeeder::class,
+            CheckoutGoodSeeder::class,
+            OrdersSeeder::class,
+            PromotionVoucherSeeder::class,
         ]);
     }
 }

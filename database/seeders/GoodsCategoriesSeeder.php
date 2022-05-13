@@ -25,13 +25,5 @@ class GoodsCategoriesSeeder extends Seeder
                 'updated_at' => now(),
             ]);
         }
-//        for ($i = 1; $i <= 10; $i++) {
-//            DB::table('good_categories')->insert([
-//                'category_title' => 'Category ' . $i,
-//                'category_description' => 'Category ' . $i . ' description',
-//                'created_at' => now(),
-//                'updated_at' => now(),
-//            ]);
-//        }
     }
 }

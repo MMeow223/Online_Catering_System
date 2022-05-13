@@ -13,19 +13,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('checkout_goods', function (Blueprint $table) {
-            $table->id()->unique();
+        Schema::create('shopping_carts', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
-            // order_id, good_id, quantity,variety
-            $table->unsignedBigInteger('order_id')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('good_id');
-            $table->unsignedBigInteger('variety_id');
             $table->unsignedInteger('quantity');
+            $table->unsignedBigInteger('variation_id')->nullable();
+            $table->boolean('selected')->default(false);
+            $table->string('voucher_code')->nullable();
 
-
-            $table->foreign('order_id')->references('id')->on('orders');
+            // Foreign keys
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('good_id')->references('id')->on('goods');
-            $table->foreign('variety_id')->references('id')->on('good_varieties');
+            $table->foreign('variation_id')->references('id')->on('good_varieties');
+
         });
     }
 
@@ -36,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('checkout_goods');
+        Schema::dropIfExists('shopping_carts');
     }
 };
