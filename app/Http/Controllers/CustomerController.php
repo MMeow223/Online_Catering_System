@@ -93,7 +93,6 @@ class CustomerController extends Controller
         $this->validate($request, [
             'username' => 'required|max:255',
             'email' => 'required|max:255',
-            'password' => 'required|max:255',
             'institutional_name' => 'max:255',
             'institutional_address' => 'max:255',
             'phone' => 'max:255',
@@ -103,7 +102,6 @@ class CustomerController extends Controller
         $input = $request->only(
             'username',
             'email',
-            bcrypt('password')
         );
         $user->update($input);
         //for customers database
@@ -119,13 +117,11 @@ class CustomerController extends Controller
                 // so add it wont give wrong error toast
             ]);
 
-        // if update fail, then redirect to customer.index page with error toast
-        if(!$notif){
-            return redirect()->route('customer.index')->with('error','Record Added Failed. Please Try Again');
-        }
+
+        return redirect()->route('customer.index')->with('success',$request->username . ' member updated');
 
         // redirect to customer.show page with success toast
-        return redirect()->route('customer.index')->with('success',$request->username . ' ');
+
 
     }
     /**
