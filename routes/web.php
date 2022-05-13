@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [\App\Http\Controllers\Controller::class,'index'])->name('dashboard');
+
+Route::get('/order-status', [\App\Http\Controllers\OrderStatusController::class,'index']);
+Route::get('/order-status/{id}', [\App\Http\Controllers\OrderStatusController::class,'show'])->name('orderView');
+
 Route::resource('goods', \App\Http\Controllers\GoodsController::class);
 Route::get('/view/goods/{id}', [\App\Http\Controllers\GoodsController::class, 'view']);
 
