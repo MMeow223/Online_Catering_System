@@ -37,16 +37,15 @@
             </ul>
             <div class="row mx-auto py-3">
                 <div class="col">
-
-                    <input class="fs-6" type="radio" name="expiry_date" id="duration-radio-day" value="{{$customer->expiry_date= now()->addDays(1)}}" checked="checked">
-                    <label class="fs-6" for="duration-radio-day">
-                        {{__('1 Day')}}
-                    </label>
-                </div>
-                <div class="col">
                     <input class=" fs-6" type="radio" name="expiry_date" id="duration-radio-month" value="{{$customer->expiry_date=now()->addDays(30)}}">
                     <label class="fs-6" for="duration-radio-month">
                         {{__('1 Month')}}
+                    </label>
+                </div>
+                <div class="col">
+                    <input class=" fs-6" type="radio" name="expiry_date" id="duration-radio-6month" value="{{$customer->expiry_date=now()->addDays(180)}}">
+                    <label class="fs-6" for="duration-radio-6month">
+                        {{__('6 Month')}}
                     </label>
                 </div>
                 <div class="col">

@@ -106,8 +106,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password"
-                                       value="{{Auth()->user()->password}}" required autofocus>
+                                <input id="password" type="password" class="form-control" name="password" value="{{Auth()->user()->password}}"required autofocus>
                                 <div class="collapse" id="collapse-password">
                                     <p class="text-muted"><small>This value entered in this field will be displayed as
                                             the password. Remove the encrypted password and insert new password, will be automatically encrypted too.</small></p>
@@ -133,7 +132,7 @@
 
                             <div class="col-md-6">
                                 <input id="institutional_name" type="text" class="form-control" name="institutional_name"
-                                       value="{{$customer->institution_name ?? ' '}}" required autofocus>
+                                       value="{{$customer->institution_name ?? ''}}" placeholder="Enter institution name" autofocus>
                                 <div class="collapse" id="collapse-institutional_name">
                                     <p class="text-muted"><small>This value entered in this field will be displayed as
                                             the Institutional name.</small></p>
@@ -158,7 +157,7 @@
 
                             <div class="col-md-6">
                                 <input id="institutional_address" type="text" class="form-control" name="institutional_address"
-                                       value="{{$customer->institution_address ?? ' '}}" required autofocus>
+                                       value="{{$customer->institution_address ?? ''}}" placeholder="Enter institution address" autofocus>
                                 <div class="collapse" id="collapse-institutional_address">
                                     <p class="text-muted"><small>This value entered in this field will be displayed as
                                             the Institutional address.</small></p>
@@ -182,8 +181,8 @@
                             </div>
 
                             <div class="col-md-6">
-                                <input id="phone" type="text" class="form-control" name="phone"
-                                       value="{{$customer->phone ?? ' '}}" required autofocus>
+                                <input id="phone" type="number" class="form-control" name="phone"
+                                       value="{{$customer->phone ?? ''}}" placeholder="012-333-4444"  autofocus>
                                 <div class="collapse" id="collapse-phone">
                                     <p class="text-muted"><small>This value entered in this field will be displayed as
                                             the phone number.</small></p>
