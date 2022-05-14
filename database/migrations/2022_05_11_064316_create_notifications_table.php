@@ -18,8 +18,10 @@ return new class extends Migration
             $table->string('notification_title');
             $table->string('notification_description');
             $table->string('notification_image');
-            $table->string('notification_type');
+            $table->unsignedBigInteger('notification_type_id');
             $table->timestamps();
+
+            $table->foreign('notification_type_id')->references('id')->on('notification_type');
         });
     }
 
