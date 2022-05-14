@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Good;
 use App\Models\GoodVariety;
 use App\Models\PromotionVoucher;
+use App\Models\UserVoucher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -148,4 +149,18 @@ class PromotionVoucherController extends Controller
         return redirect()->route('voucher.index')
             ->with('success','Good deleted');
     }
+
+    public function claim_voucher($voucher_id){
+
+        UserVoucher::create([
+            'user_id' => auth()->user()->id,
+            'voucher_code' => $voucher_id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+       return redirect('/')
+            ->with('success','Congratulation! You have claimed the voucher!');
+    }
+
 }
