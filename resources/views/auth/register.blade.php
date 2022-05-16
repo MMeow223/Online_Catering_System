@@ -61,7 +61,7 @@
                             </div>
                         </div>
                         <div class="row mb-3 text-center">
-                            <p >Customer Information (optional)</p>
+                            <p>Customer Information (optional)</p>
                         </div>
                         <div class="row mb-3">
                             <label for="institution_name" class="col-md-4 col-form-label text-md-end">{{ __('Institution Name') }}</label>
@@ -81,7 +81,7 @@
                             <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('Phone Number') }}</label>
 
                             <div class="col-md-6">
-                                <input id="phone" type="number" class="form-control" name="phone" placeholder="012-3334-4455" value="{{old('phone')}}">
+                                <input id="phone" type="text" class="form-control" name="phone" placeholder="012-3334-4455" pattern="^(\+?6?01)[0-46-9]-*[0-9]{7,8}$" value="{{old('phone')}}">
                             </div>
                         </div>
 

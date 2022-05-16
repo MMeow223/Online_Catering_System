@@ -157,11 +157,11 @@
                             </div>
 
                             <div class="col-md-6">
-                                <input id="phone" type="number" class="form-control" name="phone"
-                                       value="{{$customer->phone ?? ''}}" placeholder="012-333-4444"  autofocus>
+                                <input id="phone" type="text" class="form-control" name="phone"
+                                       value="{{$customer->phone ?? ''}}" placeholder="012-333-4444" pattern="^(\+?6?01)[0-46-9]-*[0-9]{7,8}$" autofocus>
                                 <div class="collapse" id="collapse-phone">
                                     <p class="text-muted"><small>This value entered in this field will be displayed as
-                                            the phone number.</small></p>
+                                            the phone number. Make sure it matched format of Malaysia number</small></p>
                                 </div>
                             </div>
                         </div>

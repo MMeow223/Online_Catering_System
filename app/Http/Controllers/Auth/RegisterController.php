@@ -56,7 +56,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'institution_name'=>['max:255'],
             'institution_address'=>['max:255'],
-            'phone'=>['regex:/^(01)[0-46-9]*[0-9]{7,8}$/']
+            'phone'=>['max:255']
         ]);
     }
 
