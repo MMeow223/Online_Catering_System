@@ -54,6 +54,9 @@ class RegisterController extends Controller
             'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'institution_name'=>['max:255'],
+            'institution_address'=>['max:255'],
+            'phone'=>['regex:/^(01)[0-46-9]*[0-9]{7,8}$/']
         ]);
     }
 
@@ -73,7 +76,18 @@ class RegisterController extends Controller
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        $user -> customer()->create(['user_id'=>$user->user_id]);
+        $user->customer()->create([
+            'user_id'=>$user->user_id,
+
+        ]);
+        DB::table('customers')
+            ->where('user_id',$user->id)
+            ->update([
+                'institution_name' => $data['institution_name'],
+                'institution_address' => $data['institution_address'],
+                'email'=> $data['email'],
+                'phone' => $data['phone'],
+            ]);
         return $user;
     }
 }

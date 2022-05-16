@@ -95,7 +95,7 @@ class CustomerController extends Controller
             'email' => 'required|max:255',
             'institutional_name' => 'max:255',
             'institutional_address' => 'max:255',
-            'phone' => 'max:255',
+            'phone' => 'regex:/^(01)[0-46-9]*[0-9]{7,8}$/',
         ]);
         //this is for user database
         $notif = $user->password = bcrypt($request->input('password'));
