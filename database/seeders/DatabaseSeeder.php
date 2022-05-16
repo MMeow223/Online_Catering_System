@@ -22,9 +22,13 @@ class DatabaseSeeder extends Seeder
             GoodsSeeder::class,
             GoodsVarietySeeder::class,
             PaymentSeeder::class,
+
             OrdersSeeder::class,
             CheckoutGoodSeeder::class,
             PromotionVoucherSeeder::class,
+
+            NotificationTypeSeeder::class,
+
         ]);
     }
 }
