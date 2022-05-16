@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Customer;
 use App\Models\Notification;
-use App\Models\NotificationType;
 use Illuminate\Support\Facades\DB;
 use App\Notifications\OffersNotification;
 
@@ -38,13 +35,15 @@ class NotificationController extends Controller
     public function createPromotion()
     {
         \Illuminate\Support\Facades\Mail::to('102761134@students.swinburne.edu.my')->send(new \App\Mail\PromotionMail());
-        return view('notifications.create');
+        return redirect('/notifications/create')
+            ->with('success', 'Promotion sent successfully');
     }
 
     public function createVoucher()
     {
         \Illuminate\Support\Facades\Mail::to('102761134@students.swinburne.edu.my')->send(new \App\Mail\VoucherMail());
-        return view('notifications.create');
+        return redirect('/notifications/create')
+            ->with('success', 'Voucher sent successfully');
     }
 
     public function activateMembership()

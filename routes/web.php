@@ -83,7 +83,7 @@ Route::get('/email/membership', function(){
 });
 
 Route::get('/promotion', [\App\Http\Controllers\NotificationController::class,'createPromotion'])->name('createPromo');
-Route::get('/voucher', [\App\Http\Controllers\NotificationController::class,'createVoucher'])->name('createVoucher');
+Route::get('/vouchers', [\App\Http\Controllers\NotificationController::class,'createVoucher'])->name('createVoucher');
 Route::get('/order-mail', [\App\Http\Controllers\NotificationController::class,'orderStatus'])->name('orderStatus');
 
 Route::get('/claim-voucher/{voucher_id}', [\App\Http\Controllers\PromotionVoucherController::class,'claim_voucher']);

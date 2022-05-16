@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+        <a class="btn btn-primary" href="/notifications/create">Create New Notification</a>
         <div class="row">
             <div class="col-2">
                 <nav class="navbar bg-light pt-5">

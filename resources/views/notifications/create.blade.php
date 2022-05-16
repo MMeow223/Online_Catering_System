@@ -3,13 +3,15 @@
 @section('content')
 
     <div class="container">
-        <div class="row justify-content-center">
+        <h1>Create Notification</h1>
+        <h4>Choose a notification to create:</h4>
+        <div class="row justify-content-center p-3">
             <a href="{{ route('createPromo') }}"
-               class="btn btn-primary float-right">{{ __('Create Promotion') }}</a>
+               class="btn btn-primary float-right m-5 p-5 w-50">{{ __('Create Promotion') }}</a>
         </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center p-3">
             <a href="{{ route('createVoucher') }}"
-               class="btn btn-primary float-right">{{ __('Create Voucher') }}</a>
+               class="btn btn-primary float-right m-5 p-5 w-50">{{ __('Create Voucher') }}</a>
         </div>
     </div>
 
