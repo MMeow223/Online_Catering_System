@@ -4,7 +4,7 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            <a href="{{ route('createPromotion') }}"
+            <a href="{{ route('createPromo') }}"
                class="btn btn-primary float-right">{{ __('Create Promotion') }}</a>
         </div>
         <div class="row justify-content-center">

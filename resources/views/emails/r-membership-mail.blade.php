@@ -1,9 +1,9 @@
 @component('mail::message')
-# Membership Activation
+# Membership Reactivation
 
 Dear user,
 
-You have successfully activated membership.
+You have successfully reactivated membership.
 Enjoy shopping!
 
 @component('mail::button', ['url' => 'http://127.0.0.1:8000/customer'])

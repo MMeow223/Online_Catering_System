@@ -63,7 +63,7 @@
         <div class="row justify-content-center m-4">
             <div class="col">
                 <div class="card shadow bg-warning">
-                    <a class="card-body text-decoration-none text-black p-5 text-white " href="/notifications/admin">
+                    <a class="card-body text-decoration-none text-black p-5 text-white " href="/notifications/create">
                         <div class=" d-flex justify-content-center ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-cash-coin" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"/>

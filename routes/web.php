@@ -66,7 +66,6 @@ Route::get('/disclaimer', function () {
 
 //mail for promotion
 Route::get('/email/promotion', function(){
-    \Illuminate\Support\Facades\Mail::to('102761134@students.swinburne.edu.my')->send(new \App\Mail\PromotionMail());
     return new \App\Mail\PromotionMail();
 });
 //mail for voucher
@@ -83,7 +82,9 @@ Route::get('/email/membership', function(){
     return new \App\Mail\MembershipMail();
 });
 
-Route::get('/promotion', [\App\Http\Controllers\NotificationController::class,'createPromotion'])->name('createPromotion');
+Route::get('/promotion', [\App\Http\Controllers\NotificationController::class,'createPromotion'])->name('createPromo');
 Route::get('/voucher', [\App\Http\Controllers\NotificationController::class,'createVoucher'])->name('createVoucher');
+Route::get('/order-mail', [\App\Http\Controllers\NotificationController::class,'orderStatus'])->name('orderStatus');
+
 Route::get('/claim-voucher/{voucher_id}', [\App\Http\Controllers\PromotionVoucherController::class,'claim_voucher']);
 

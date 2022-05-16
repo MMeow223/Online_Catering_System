@@ -167,12 +167,15 @@ class CustomerController extends Controller
         }
 
         if($customer->is_member ==1 && $customer->is_subscribed==0){
+            \Illuminate\Support\Facades\Mail::to('102761134@students.swinburne.edu.my')->send(new \App\Mail\RMembershipMail());
             return redirect()->route('customer.index')->with('success',Auth::user()->username . ', member have been reactivated');
         }
         elseif($customer->is_member ==1){
+            \Illuminate\Support\Facades\Mail::to('102761134@students.swinburne.edu.my')->send(new \App\Mail\DMembershipMail());
             return redirect()->route('customer.index')->with('success',Auth::user()->username . ', member have been deactivated');
         }
         else{
+            \Illuminate\Support\Facades\Mail::to('102761134@students.swinburne.edu.my')->send(new \App\Mail\MembershipMail());
             return redirect()->route('customer.index')->with('success',Auth::user()->username . ', member have been activated');
         }
 

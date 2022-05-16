@@ -151,8 +151,9 @@
                     RM {{number_format((float)($total_price), 2, '.', '')}}</h3>
                 <h1 id="cart-item-total-price-with-discount" class="m-2 text-warning row">
                     RM {{number_format((float)($total_price_after_discount), 2, '.', '')}}</h1>
-                <button type="submit" class="btn btn-outline-red px-5 py-2 align-self-center d-inline m-2">Place
-                    Order</button>
+                <button formaction="/order-mail" type="submit" class="btn btn-outline-red px-5 py-2 align-self-center d-inline m-2">Place
+                        Order
+                    </button>
             </div>
         </div>
         </form>

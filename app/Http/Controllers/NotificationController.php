@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Customer;
 use App\Models\Notification;
 use App\Models\NotificationType;
 use Illuminate\Support\Facades\DB;
@@ -46,9 +47,15 @@ class NotificationController extends Controller
         return view('notifications.create');
     }
 
+    public function activateMembership()
+    {
+        \Illuminate\Support\Facades\Mail::to('102761134@students.swinburne.edu.my')->send(new \App\Mail\MembershipMail());
+        return redirect()->back();
+    }
+
     public function orderStatus(){
-        return view('emails.orderStatus');
-        //->with(order status of the user);
+        \Illuminate\Support\Facades\Mail::to('102761134@students.swinburne.edu.my')->send(new \App\Mail\OrderMail());
+        return redirect()->back();
     }
 
     /**
