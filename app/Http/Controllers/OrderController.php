@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CheckoutGoods;
 use App\Models\Customer;
 use App\Models\GoodCategory;
 use App\Models\GoodVariety;
@@ -29,6 +30,33 @@ class OrderController extends Controller
         return view('orders.index')
             ->with('orders', Order::orderBy('delivery_time','ASC')->paginate(10));
     }
+
+    public function preparation($id)
+    {
+        // link to show page with good data and category data
+        $orders = Order::find($id);
+        if($orders->is_prepared){
+            $newStatus = 0;
+        }else {$newStatus = 1;}
+        Order::where('id',$id)->update(['is_prepared'=>$newStatus]);
+        return view('orders.index')
+            ->with('orders', Order::orderBy('delivery_time','ASC')->paginate(10));
+    }
+
+    public function deliver($id)
+    {
+        // link to show page with good data and category data
+        $orders = Order::find($id);
+        if($orders->is_prepared){
+            if($orders->is_delivered){
+                $newStatus = 0;
+            }else {$newStatus = 1;}
+        }else{$newStatus = $orders->is_delivered;}
+        Order::where('id',$id)->update(['is_delivered'=>$newStatus]);
+        return view('orders.index')
+            ->with('orders', Order::orderBy('delivery_time','ASC')->paginate(10));
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -131,6 +159,8 @@ class OrderController extends Controller
             ->with('category', GoodCategory::find($good->good_category_id))
             ->with('varieties', GoodVariety::where('good_id', $id)->orderBy('is_available','DESC')->get());
     }
+
+
 
     /**
      * Show the form for editing the specified resource.

@@ -39,12 +39,15 @@
                                         <td>{{ $order->delivery_time }}</td>
                                         <td>{{ $order->total_price }}</td>
                                         <td><a href="{{ route('payments.show', $order->payment_id)}}">{{ $order->payment_id }}</a></td>
-                                        <td>
-                                            <button class="btn @if($order->is_prepared) btn-success @else btn-outline-danger @endif" @if($order->is_prepared) checked @endif disabled>@if($order->is_prepared) {{__('Prepared')}} @else {{__('Preparing')}}@endif</button>
-                                        </td>
-                                        <td>
-                                            <button class="btn @if($order->is_delivered) btn-success @else btn-outline-danger @endif" @if($order->is_delivered) checked @endif disabled>@if($order->is_delivered) {{__('Delivered')}} @else {{__('Delivering')}}@endif</button>
-                                        </td>
+                                        <form action="update" method="POST">
+                                            @csrf
+                                            <td>
+                                                <a href="{{ route('preparationStatus', $order->id) }}" class="btn @if($order->is_prepared) btn-success @else btn-outline-danger @endif" @if($order->is_prepared) checked @endif>@if($order->is_prepared) {{__('Prepared')}} @else {{__('Preparing')}}@endif</a>
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('deliverStatus', $order->id) }}" class="btn @if($order->is_delivered) btn-success @else btn-outline-danger @endif" @if($order->is_delivered) checked @endif >@if($order->is_delivered) {{__('Delivered')}} @else {{__('Delivering')}}@endif</a>
+                                            </td>
+                                        </form>
                                     </tr>
                                 @endforeach
                             @endif
