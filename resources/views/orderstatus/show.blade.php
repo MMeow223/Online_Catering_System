@@ -94,8 +94,8 @@
                 {{--                <a href="#" class="btn btn-outline-red p-1">Online Banking</a>--}}
             </div>
             <div class="d-flex justify-content-end border-bottom border-2">
-                <h3 class="m-2">Total Price:</h3>
-                <h1 id="cart-item-total-price" class="m-2 text-warning row">RM {{ $orders->total_price }}</h1>
+                <h3 class="m-2">Total Price</h3>
+                <h1 id="cart-item-total-price" class="m-2 text-warning row">{{ $orders->total_price }}</h1>
             </div>
 
         </div>

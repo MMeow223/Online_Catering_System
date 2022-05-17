@@ -13,6 +13,8 @@ class Customer extends Model
         'username',
         'email',
         'password',
+        'is_member',
+        'expiry_date',
     ];
     public function user(): BelongsTo
     {

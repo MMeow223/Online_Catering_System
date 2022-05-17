@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\CheckoutGoods;
+use App\Models\Customer;
 use App\Models\Good;
 use App\Models\Order;
 use App\Models\ShoppingCart;
 use App\Models\User;
+use App\Models\UserVoucher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class OrderStatusController extends Controller
 {

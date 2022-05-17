@@ -76,8 +76,6 @@
                         </div>
                     </div>
 
-
-
                     <div class="form-group row my-2">
                         <div class="col-md-4 col-form-label text-md-right d-flex justify-content-between">
                             <label for="institution_name">{{ __('Institution Name') }}</label>
@@ -150,7 +148,8 @@
                         </div>
 
                         <div class="col-md-6 my-2">
-                            <p>@if($customer->is_member){{__('Member')}}@else{{__('Not Member')}}@endif</p>
+                            <p>@if($customer->is_member){{__('Member ')}} @else{{__('Not Member')}}@endif</p>
+                            <p>@if($customer->is_member&& $customer->is_subscribed==0){{__('Expired Date: ')}} {{$customer->expiry_date}} {{' (member will be expired after this date) '}}@elseif($customer->is_member){{__('Expired Date: ')}} {{$customer->expiry_date}} {{' (will be extended by one month unless unsubscribed) '}}@else @endif</p>
                             <div class="collapse" id="collapse-member">
                                 <p class="text-muted"><small>This value entered in this field will be displayed as the member status.</small></p>
                             </div>
@@ -158,7 +157,9 @@
                     </div>
                     <div class="form-group row my-2">
                         <div class="col-md-6">
-                            @if($customer->is_member)
+                            @if($customer->is_member==1 AND $customer->is_subscribed==0)
+                                <a href="/customer/member/{{$customer->user_id}}">{{__('Reactivate Member?')}} </a>
+                            @elseif($customer->is_member)
                                 <a href="/customer/member/{{$customer->user_id}}">{{__('Deactivate Member?')}} </a>
                             @else
                                 <a href="/customer/member/{{$customer->user_id}}">{{__('Activate Member?')}} </a>

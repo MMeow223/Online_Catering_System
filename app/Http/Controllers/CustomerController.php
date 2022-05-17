@@ -18,6 +18,20 @@ class CustomerController extends Controller
     public function index()
     {
         $customer = Auth::user()->customer()->first();
+        if($customer->is_subscribed==0 && $customer->expiry_date < now()){
+            DB::table('customers')
+                ->where('user_id',Auth::user()->id)
+                    ->update([
+                        'is_member' => 0,
+                    ]);
+        }
+        elseif($customer->is_subscribed==1 && $customer->expiry_date < now()){
+            DB::table('customers')
+                ->where('user_id',Auth::user()->id)
+                ->update([
+                    'expiry_date' => now()->addDays(30),
+                ]);
+        }
         return view('customer.show',['customer'=>$customer]);
     }
 
@@ -61,6 +75,7 @@ class CustomerController extends Controller
     public function edit()
     {
         $customer = Auth::user()->customer()->first();
+
         return view('customer.edit',['customer'=>$customer]);
     }
 
@@ -81,14 +96,14 @@ class CustomerController extends Controller
             'password' => 'required|max:255',
             'institutional_name' => 'max:255',
             'institutional_address' => 'max:255',
-            'phone' => 'regex:^(\+?6?01)[0-46-9]-*[0-9]{7,8}$^',
+            'phone' => 'max:255',
         ]);
         //this is for user database
         $notif = $user->password = bcrypt($request->input('password'));
         $input = $request->only(
             'username',
             'email',
-            bcrypt('password'),
+            bcrypt('password')
         );
         $user->update($input);
         //for customers database
@@ -120,28 +135,6 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function true(){
-        $customer = Auth::user()->customer()->first();
-        return view('customer.true',['customer'=>$customer]);
-    }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function false(){
-        $customer = Auth::user()->customer()->first();
-        return view('customer.false',['customer'=>$customer]);
-    }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
     public function member(){
         $customer = Auth::user()->customer()->first();
         return view('customer.member',['customer'=>$customer]);
@@ -158,12 +151,17 @@ class CustomerController extends Controller
         $customer = Auth::user()->customer()->first();
         $this->validate($request, [
             'is_member' => 'boolean',
+            'expiry_date' => 'date',
+            'is_subscribed' => 'boolean',
         ]);
 
         $query= DB::table('customers')
             ->where('user_id',Auth::user()->id)
             ->update([
                 'is_member' => $request->input('is_member'),
+                'activate_date' => now(),
+                'expiry_date' => $request->input('expiry_date'),
+                'is_subscribed' => $request->input('is_subscribed'),
                 // actually it will update this column automatically,
                 // but we want to make sure the query is executed,
                 // so add it wont give wrong error toast
@@ -172,7 +170,10 @@ class CustomerController extends Controller
             return redirect()->route('customer.index')->with('error','Record Added Failed. Please Try Again');
         }
 
-        if($customer->is_member ==1){
+        if($customer->is_member ==1 && $customer->is_subscribed==0){
+            return redirect()->route('customer.index')->with('success',Auth::user()->username . ', member have been reactivated');
+        }
+        elseif($customer->is_member ==1){
             return redirect()->route('customer.index')->with('success',Auth::user()->username . ', member have been deactivated');
         }
         else{
