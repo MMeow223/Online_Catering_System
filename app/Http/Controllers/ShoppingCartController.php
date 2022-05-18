@@ -12,6 +12,7 @@ use App\Http\Requests\StoreShoppingCartRequest;
 use App\Http\Requests\UpdateShoppingCartRequest;
 use App\Models\User;
 use App\Models\UserVoucher;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -51,7 +52,6 @@ class ShoppingCartController extends Controller
                 $selectedItemCount += 1;
             }
         }
-//        dd($selectedItemCount);
 
         return view('cart.index')
             ->with('cart_items', $cart_items)
@@ -264,7 +264,6 @@ class ShoppingCartController extends Controller
             ->with('actual_discount_amount',$actual_discount_amount)
             ->with('customer_information',$customer_information)
             ->with('discount',$discount);
-            ;
 
 
     }
