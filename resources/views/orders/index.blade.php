@@ -38,7 +38,13 @@
                                         <td><a href="{{ route('users.show', $order->user_id) }}">{{ $order->user_id }}</a></td>
                                         <td>{{ $order->delivery_time }}</td>
                                         <td>{{ $order->total_price }}</td>
-                                        <td><a href="{{ route('payments.show', $order->payment_id)}}">{{ $order->payment_id }}</a></td>
+                                        <td>
+                                            @if($order->payment_id != null)
+                                            <a href="{{ route('payments.show', $order->payment_id)}}">{{ $order->payment_id }}</a>
+                                            @else
+                                                {{ __('Cash on Delivery') }}
+                                            @endif
+                                        </td>
                                         <form action="update" method="POST">
                                             @csrf
                                             <td>
