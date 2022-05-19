@@ -28,8 +28,8 @@
                             @foreach ($payments as $payment)
                                 <tr>
                                     <td>{{ $payment->payment_method }}</td>
-                                    <td>{{ $payment->account_number }}</td>
-                                    <td>{{ $payment->transaction_id }}</td>
+                                    <td>@if($payment->account_number != null){{ $payment->account_number }}@else - @endif</td>
+                                    <td>@if($payment->transaction_id != null){{ $payment->transaction_id }}@else - @endif</td>
                                     <td>{{ $payment->total_amount }}</td>
                                     <td>
                                         <a href="{{ route('payments.show', $payment->id) }}"
