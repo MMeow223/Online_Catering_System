@@ -65,22 +65,7 @@
                             <td class="align-middle" id="cart-item-total-price-{{$item->id}}">RM{{ number_format((float)($item->good_price * $item->quantity), 2, '.', '')}}</td>
                         </tr>
                     @endif
-                @endforeach
-{{--            <tr class="shadow-sm align-middle">--}}
-{{--                <td class="align-middle">--}}
-{{--                    <img src="" width="64" height="64">--}}
-{{--                    Product Name--}}
-{{--                </td>--}}
-{{--                <td class="align-middle">Variation 1</td>--}}
-{{--                <td class="align-middle">RM 10.00</td>--}}
-{{--                <td class="align-middle">--}}
-{{--                    <div class="row">--}}
-{{--                        12--}}
-{{--                    </div>--}}
-{{--                </td>--}}
-{{--                <td class="align-middle" id="cart-item-total-price">RM 120.00</td>--}}
-{{--            </tr>--}}
-
+            @endforeach
             </tbody>
         </table>
 

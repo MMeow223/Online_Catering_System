@@ -152,7 +152,16 @@
                 <div class="col-8">
                     <div class="row">
                         <div class="  d-flex justify-content-end">
-                            <a href="#" class="text-black me-3">
+
+                            <a href="/order-status" class="text-black me-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-paper" viewBox="0 0 16 16">
+                                    <path d="M4 0a2 2 0 0 0-2 2v1.133l-.941.502A2 2 0 0 0 0 5.4V14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5.4a2 2 0 0 0-1.059-1.765L14 3.133V2a2 2 0 0 0-2-2H4Zm10 4.267.47.25A1 1 0 0 1 15 5.4v.817l-1 .6v-2.55Zm-1 3.15-3.75 2.25L8 8.917l-1.25.75L3 7.417V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v5.417Zm-11-.6-1-.6V5.4a1 1 0 0 1 .53-.882L2 4.267v2.55Zm13 .566v5.734l-4.778-2.867L15 7.383Zm-.035 6.88A1 1 0 0 1 14 15H2a1 1 0 0 1-.965-.738L8 10.083l6.965 4.18ZM1 13.116V7.383l4.778 2.867L1 13.117Z"/>
+                                </svg>
+                                Orders
+                            </a>
+
+                            <a href="{{route('notifications.index')}}" class="text-black me-3">
+
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
                                     <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
                                 </svg>
@@ -172,14 +181,14 @@
                                 </svg>
                                 Profile
                             </a>
-                            <a href="#" class="text-black  me-3">
+                            <a href="/about" class="text-black  me-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                     <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
                                 </svg>
                                 About
                             </a>
-                            <a href="#" class="text-black  me-3">
+                            <a href="/help" class="text-black  me-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                     <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
@@ -323,6 +332,16 @@
                                                 <span>Voucher Manage</span>
                                             </a>
                                         </li>
+                                        <li class="mx-2 {{ (request()->is('notifications*')) ? 'bg-opacity-50 bg-secondary rounded' : '' }}">
+                                            <a href="/notifications/create"
+                                               class="nav-link px-3 {{ (request()->is('notifications*')) ? 'active' : '' }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ticket-perforated" viewBox="0 0 16 16">
+                                                    <path d="M4 4.85v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Zm-7 1.8v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Zm-7 1.8v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Zm-7 1.8v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Z"/>
+                                                    <path d="M1.5 3A1.5 1.5 0 0 0 0 4.5V6a.5.5 0 0 0 .5.5 1.5 1.5 0 1 1 0 3 .5.5 0 0 0-.5.5v1.5A1.5 1.5 0 0 0 1.5 13h13a1.5 1.5 0 0 0 1.5-1.5V10a.5.5 0 0 0-.5-.5 1.5 1.5 0 0 1 0-3A.5.5 0 0 0 16 6V4.5A1.5 1.5 0 0 0 14.5 3h-13ZM1 4.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v1.05a2.5 2.5 0 0 0 0 4.9v1.05a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-1.05a2.5 2.5 0 0 0 0-4.9V4.5Z"/>
+                                                </svg>
+                                                <span>Notification Manage</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
@@ -340,50 +359,55 @@
 
 @if(!auth()->guest() AND !auth()->user()->is_admin)
     <hr>
-    <div class="container bg-light p-5 ">
-        <div class="row" >
-            <div class="col-sm-4 bg-light p-0">
+    <div class="container bg-light p-5">
+        <div class="row " >
+
+            <div class="col-4 bg-light p-0">
                 <div class="text-secondary row">
                     <h5>Dashboard</h5>
 
                     <ul class="nav nav-pills flex-column">
                         <li class="ps-4 nav-item">
-                            <a class="text-black" href="#">Home</a>
+                            <a class="text-black" href="/">Home</a>
                         </li>
                         <li class="ps-4 nav-item">
-                            <a class="text-black" href="#">Profile</a>
+                            <a class="text-black" href="/profile">Profile</a>
                         </li>
                         <li class="ps-4 nav-item">
-                            <a class="text-black" href="#">Navigation</a>
+                            <a class="text-black" href="#">Notiification</a>
                         </li>
                         <li class="ps-4 nav-item">
-                            <a class="text-black" href="#">Delivering Tab</a>
+                            <a class="text-black" href="/order-status">Orders</a>
+                        </li>
+                        <li class="ps-4 nav-item">
+                            <a class="text-black" href="/help">Help</a>
                         </li>
                     </ul>
                 </div>
             </div>
 
-            <div class="col-sm-4 bg-light p-0">
+            <div class="col-4 bg-light p-0">
                 <div class="text-secondary row">
                     <h5>About Pinocone</h5>
 
                     <ul class="nav nav-pills flex-column">
                         <li class="ps-4 nav-item">
-                            <a class="text-black" href="#">About Us</a>
+                            <a class="text-black" href="/about">About Us</a>
                         </li>
+
                         <li class="ps-4 nav-item">
-                            <a class="text-black" href="#">Policies</a>
-                        </li>
-                        <li class="ps-4 nav-item">
-                            <a class="text-black" href="#">Disclaimer</a>
+                            <a class="text-black" href="/disclaimer">Disclaimer</a>
                         </li>
                     </ul>
                 </div>
-
             </div>
-
-            <div class="col-sm-4 bg-light p-0">
-                <div class="text-secondary row"><h5>Payment</h5></div>
+            <div class="col-4 bg-light p-0">
+                <div class="text-secondary row">
+                    <h1 class="text-warning fw-bold text-decoration-none" style="font-size:8em">
+                        PinoCone
+                    </h1>
+                    <p class="text-warning fw-bold text-decoration-none text-end" style="font-size:2em; letter-spacing: 10px;">Catering Service</p>
+                </div>
             </div>
         </div>
     </div>
@@ -394,6 +418,5 @@
         </div>
     </div>
 @endif
-
 </body>
 </html>

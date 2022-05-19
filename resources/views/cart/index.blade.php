@@ -4,8 +4,6 @@
     <div class="container">
 
         <h1>Shopping Cart</h1>
-        <a href="order-status" class="btn btn-danger">Order</a>
-
         <table class="table">
             <thead  class=" rounded-2 border-0 ">
             <tr style="background-color: #d7d8da">

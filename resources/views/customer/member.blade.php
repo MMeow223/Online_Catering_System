@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    {!! Form::open(['route' => ['changeStatus', Auth::user()->id],'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+    {!! Form::open(['route' => ['changeStatus',Auth::user()->id],'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
     <div class="px-2 py-5 my-5 text-center">
         <h1 class="display-5 fw-bold">@if($customer->is_member && $customer->is_subscribed ==0){{__('Member Reactivation')}}@elseif($customer->is_member){{ __('Member Deactivation') }}@else{{__('Member Activation')}}@endif</h1>
         <fieldset class="col-lg-4 mx-auto">
@@ -15,7 +15,7 @@
                 <input name="expiry_date" value="{{ $customer->expiry_date }}" type="hidden">
                 <input name="is_subscribed" value="{{ $customer->is_subscribed = 1 }}" type="hidden">
                 <input name="is_member" value="{{ $customer->is_member = 1 }}" type="hidden">
-                {{ Form::submit('Reactivate Membership', ['class' => 'btn btn-success']) }}
+                {{ Form::submit('Reactivate Membership', ['class' => 'btn btn-success'], url('/membership')) }}
             </div>
         @elseif($customer->is_member)
             <p class="lead mb-4">Upon deactivating membership, you will lose some of these perks:</p>
@@ -58,7 +58,7 @@
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                 <input name="is_subscribed" value="{{ $customer->is_subscribed = 1 }}" type="hidden">
                 <input name="is_member" value="{{$customer->is_member = 1}}" type="hidden">
-                {{ Form::submit('Activate Membership', ['class' => 'btn btn-success']) }}
+                {{ Form::submit('Activate Membership', ['class' => 'btn btn-success'], url('/membership')) }}
             </div>
 
 

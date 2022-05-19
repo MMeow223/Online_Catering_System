@@ -93,21 +93,18 @@ class CustomerController extends Controller
         $this->validate($request, [
             'username' => 'required|max:255',
             'email' => 'required|max:255',
-            'password' => 'required|max:255',
             'institutional_name' => 'max:255',
             'institutional_address' => 'max:255',
             'phone' => 'max:255',
         ]);
         //this is for user database
-        $notif = $user->password = bcrypt($request->input('password'));
         $input = $request->only(
             'username',
             'email',
-            bcrypt('password')
         );
         $user->update($input);
         //for customers database
-        $query = DB::table('customers')
+        DB::table('customers')
             ->where('user_id',Auth::user()->id)
             ->update([
                 'institution_name' => $request->input('institutional_name'),
@@ -119,13 +116,11 @@ class CustomerController extends Controller
                 // so add it wont give wrong error toast
             ]);
 
-        // if update fail, then redirect to customer.index page with error toast
-        if(!$notif){
-            return redirect()->route('customer.index')->with('error','Record Added Failed. Please Try Again');
-        }
+
+        return redirect()->route('customer.index')->with('success',$request->username . ' member updated');
 
         // redirect to customer.show page with success toast
-        return redirect()->route('customer.index')->with('success',$request->username . ' ');
+
 
     }
     /**
@@ -171,12 +166,15 @@ class CustomerController extends Controller
         }
 
         if($customer->is_member ==1 && $customer->is_subscribed==0){
+            \Illuminate\Support\Facades\Mail::to('102761134@students.swinburne.edu.my')->send(new \App\Mail\RMembershipMail());
             return redirect()->route('customer.index')->with('success',Auth::user()->username . ', member have been reactivated');
         }
         elseif($customer->is_member ==1){
+            \Illuminate\Support\Facades\Mail::to('102761134@students.swinburne.edu.my')->send(new \App\Mail\DMembershipMail());
             return redirect()->route('customer.index')->with('success',Auth::user()->username . ', member have been deactivated');
         }
         else{
+            \Illuminate\Support\Facades\Mail::to('102761134@students.swinburne.edu.my')->send(new \App\Mail\MembershipMail());
             return redirect()->route('customer.index')->with('success',Auth::user()->username . ', member have been activated');
         }
 
