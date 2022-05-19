@@ -32,7 +32,6 @@
                             <tr>
                                 <th>{{ __('Username') }}</th>
                                 <th>{{ __('Email') }}</th>
-                                <th>{{ __('Owner ID') }}</th>
                                 <th>{{ __('Last Updated') }}</th>
                             </tr>
                             </thead>
@@ -41,7 +40,6 @@
                                 <tr>
                                     <td>{{ $user->username }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>{{ $user->owner_id }}</td>
                                     <td>{{ $user->updated_at}}</td>
                                     <td>
                                         <a href="{{ route('users.show', $user->id) }}"

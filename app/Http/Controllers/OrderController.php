@@ -138,6 +138,13 @@ class OrderController extends Controller
             ->where('selected', 1)
             ->delete();
 
+        NotificationController::orderStatus();
+
+//        remove the voucher from user voucher table
+        DB::table('user_vouchers')->where('user_id', auth()->user()->id)
+            ->where('use_status','using')
+            ->delete();
+
 
         // redirect to index page
         return redirect('/cart')->with('success', 'Order created successfully');

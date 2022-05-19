@@ -184,7 +184,7 @@
                             <div class="col-md-6">
                                 <div class="btn-group col-md-6" role="group" aria-label="Basic radio toggle button group">
                                     <input type="radio" class="btn-check" name="availability_option" value=1 id="available_outlined" autocomplete="off" @if($good->is_available) checked @endif  disabled>
-                                    <label class="btn btn-outline-success" for="available_outlined">}</label>
+                                    <label class="btn btn-outline-success" for="available_outlined">{{__('Available')}}</label>
 
                                     <input type="radio" class="btn-check" name="availability_option" value=0 id="not_available_outlined" autocomplete="off" @if($good->is_available == false) checked @endif disabled>
                                     <label class="btn btn-outline-danger" for="not_available_outlined">{{__('Unavailable')}}</label>

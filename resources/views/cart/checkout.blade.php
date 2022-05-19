@@ -85,7 +85,7 @@
             @foreach($selected_cart_items as $item)
                 <tr class="shadow-sm align-middle">
                     <td class="align-middle">
-                        <img src="" width="64" height="64">
+                        <img src="{{url("/images/$item->good_image")}}" width="64" height="64">
                         {{$item->good_name}}
                     </td>
                     <td class="align-middle">{{$item->good_variety_name}}</td>
@@ -131,7 +131,8 @@
 
             <div class="d-flex justify-content-end border-bottom border-2">
                 <span class="m-2">Total Saved: <span
-                        class="fw-bold">RM {{number_format((float)( $actual_discount_amount), 2, '.', '')}}</span>  <span
+                        class="fw-bold">RM {{number_format((float)( $actual_discount_amount), 2, '.', '')}}</span>
+                    <span
                         class="fst-italic">(RM {{number_format((float)($total_price), 2, '.', '')}} * {{$discount}}% = RM{{number_format((float)(($total_price/100) * $discount), 2, '.', '')}} @if($current_using_voucher != null) [Price Limit: RM{{number_format((float)( $current_using_voucher->price_limit), 2, '.', '')}}] @endif  ) </span> </span>
 
                 @if($current_using_voucher != null)
@@ -144,16 +145,16 @@
             <div class="d-flex justify-content-end">
                 <div class="row-col-2 justify-content-end">
                     <h3 class="m-2">Total Price</h3>
-                    <span class="mx-2 row">(selected 2 items)</span>
+                    <span class="mx-2 row">(selected {{$selectedItemCount}} items)</span>
                 </div>
                 <h3 id="cart-item-total-price"
                     class="m-2 text-muted row text-decoration-line-through @if($current_using_voucher == null) d-none @endif">
                     RM {{number_format((float)($total_price), 2, '.', '')}}</h3>
                 <h1 id="cart-item-total-price-with-discount" class="m-2 text-warning row">
                     RM {{number_format((float)($total_price_after_discount), 2, '.', '')}}</h1>
-                <button formaction="/order-mail" type="submit" class="btn btn-outline-red px-5 py-2 align-self-center d-inline m-2">Place
-                        Order
-                    </button>
+
+                <button type="submit" class="btn btn-outline-red px-5 py-2 align-self-center d-inline m-2">Place Order</button>
+
             </div>
         </div>
         </form>

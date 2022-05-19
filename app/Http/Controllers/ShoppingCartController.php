@@ -29,6 +29,7 @@ class ShoppingCartController extends Controller
             ->join('users', 'shopping_carts.user_id', '=', 'users.id')
             ->join('good_varieties', 'shopping_carts.variation_id', '=', 'good_varieties.id')
             ->select('shopping_carts.*', 'goods.id as goods_id', 'goods.good_image','goods.good_name','goods.good_price', 'good_varieties.variety_name as good_variety_name', 'users.username as username')
+            ->where('shopping_carts.user_id', Auth::user()->id)
             ->get();
 
         $vouchers = UserVoucher::join('promotion_vouchers', 'user_vouchers.voucher_code', '=', 'promotion_vouchers.voucher_code')
@@ -238,7 +239,7 @@ class ShoppingCartController extends Controller
 
         if($current_using_voucher == null){
             $discount = 0;
-            $actual_discount_amount = $total_price;
+            $actual_discount_amount = 0;
 
         }
         else{

@@ -52,7 +52,7 @@ class NotificationController extends Controller
         return redirect()->back();
     }
 
-    public function orderStatus(){
+    public static function orderStatus(){
         \Illuminate\Support\Facades\Mail::to('102761134@students.swinburne.edu.my')->send(new \App\Mail\OrderMail());
         return redirect()->back();
     }
