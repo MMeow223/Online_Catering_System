@@ -17,6 +17,10 @@ Route::get('/', [\App\Http\Controllers\Controller::class,'index'])->name('dashbo
 
 Route::get('/order-status', [\App\Http\Controllers\OrderStatusController::class,'index']);
 Route::get('/order-status/{id}', [\App\Http\Controllers\OrderStatusController::class,'show'])->name('orderView');
+Route::get('/orders/preparation/{id}', [\App\Http\Controllers\OrderController::class,'preparation'])->name('preparationStatus');
+Route::get('/orders/deliver/{id}', [\App\Http\Controllers\OrderController::class,'deliver'])->name('deliverStatus');
+
+
 
 Route::resource('goods', \App\Http\Controllers\GoodsController::class);
 Route::get('/view/goods/{id}', [\App\Http\Controllers\GoodsController::class, 'view']);
