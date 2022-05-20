@@ -6,7 +6,7 @@
 
 Online Catering System is the topic that we(Elvis, Tonny, Tony, Vendy) have decided to develop for **SWE20001 - Managing Software Project**. This project is a online platform which provide catering service for institutions. There is an admin site is also developed for managing the customer site. 
 <br><br>
-We have also host this application at <a href="https://pinocone-catering.herokuapp.com/login">https://pinocone-catering.herokuapp.com/login</a>. Feel free to visit the website and test out the feature. The website will no be maintained in the future as it is develop for the education purpose. For more detail, please refer to the <a href="https://github.com/MMeow223/Online_Catering_System/edit/main/README.md#disclaimer">disclaimer</a>.
+We have also host this application at <a href="https://pinocone-catering.herokuapp.com/login">https://pinocone-catering.herokuapp.com/login</a>. Feel free to visit the website and test out the feature. The website will no be maintained in the future as it is develop for the education purpose. For more detail, please refer to the <a href="https://github.com/MMeow223/Online_Catering_System#disclaimer">disclaimer</a>.
 
 
 # Setup The Project 
