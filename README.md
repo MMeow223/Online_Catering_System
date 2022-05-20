@@ -1,7 +1,15 @@
 # Online_Catering_System
- Managing Software Project Pass Task Project
+>Snapshot of the customer home page
+>
+![image](https://user-images.githubusercontent.com/40930751/169589546-1fae966b-1c28-467e-8105-14fb8cc3f45e.png)
+<br><br>
 
-## Setup
+Online Catering System is the topic that we(Elvis,Tonny,Tony,Vendy) have decided to develop for **SWE20001 - Managing Software Project**. This project is a online platform which provide catering service for institutions. There is an admin site is also developed for managing the customer site. 
+<br><br>
+We have also host this application at <a href="https://pinocone-catering.herokuapp.com/login">https://pinocone-catering.herokuapp.com/login</a>. Feel free to visit the website and test out the feature. The website will no be maintained in the future as it is develop for the education purpose. For more detail, please refer to the <a href="https://github.com/MMeow223/Online_Catering_System/edit/main/README.md#disclaimer">disclaimer</a>.
+
+
+# Setup The Project 
 
 ### 1. Install Composer and Node.js
 To install laravel in your local local device, using composer is a great approach. You can download the composer installer it from <a href="https://getcomposer.org/download/">here</a>. You also need Node.js to access the npm command in terminal. The download link is <a href="https://nodejs.org/en/">here</a>.
@@ -157,5 +165,8 @@ pass : admin
 email: user@gmail.com
 pass : user
 ```
+
+# Disclaimer
+>This website is created mainly for educational and non-commercial use only. It is a partial fulfilment for completion of unit SWE20001 - Managing Software Project offered in Swinburne University of Technology, Sarawak Campus for Semester 1, 2022. The web-master and author(s) do not represent the business entity. The content of the pages of this website might be out-dated or inaccurate, thus, the author(s) and web-master does not take any responsibility for incorrect information disseminate or cited from this website. If you believe that information of any kind on this website is an infringement of copyright in material in which you either own copyright or are authorized to exercise the rights of a copyright owner, kindly contact the web-master (elviswong2002@hotmail.com) for removal.
 
 
